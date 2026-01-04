@@ -54,6 +54,7 @@ fi
 # load the compinit function when I first use it.
 # -U avoids alias expansion; -z uses zsh-style autoloading.
 autoload -Uz compinit
+
 # compinit initializes zsh’s completion system (tab completion).
 # It loads completion definitions so things like git <TAB> or brew <TAB> work nicely.
 compinit

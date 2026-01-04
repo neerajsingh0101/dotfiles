@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#
 # set -e tells bash: exit immediately if any command returns a
 # non-zero status (i.e., “fails”).
 # It does not always trigger in every context.

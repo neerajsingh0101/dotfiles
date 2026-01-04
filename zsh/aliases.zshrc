@@ -5,7 +5,6 @@ alias cls='clear' # clear screen
 # prefer eza over gls
 alias ll='eza --classify=auto --color -l'
 alias la='eza --classify=auto --color -a -l'
-alias ls=ls
 
 # Easy way to copy publick key to the clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -39,6 +38,3 @@ alias dotfiles="code $DOTFILESD" # open dotfiles
 
 # take me to the dotfiles directory
 alias dotfilesd="cd $DOTFILESD" # open dotfiles
-
-# shortcuts to internal notes
-alias plc="code $DOTFILESD/interal-notes/pl-call.md"
