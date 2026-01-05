@@ -17,6 +17,7 @@ ln -sfn "$DOTFILESD/symlinks/.gemrc" "$HOME/.gemrc"
 ln -sfn "$DOTFILESD/symlinks/.irbrc" "$HOME/.irbrc"
 ln -sfn "$DOTFILESD/symlinks/.gitconfig" "$HOME/.gitconfig"
 ln -sfn "$DOTFILESD/symlinks/.gitignore" "$HOME/.gitignore"
+ln -sfn "$DOTFILESD/symlinks/.psqlrc" "$HOME/.psqlrc"
 
 update-dotfiles-env() {
   local link="$HOME/.dotfiles.env"
