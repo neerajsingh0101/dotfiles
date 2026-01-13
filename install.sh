@@ -49,7 +49,7 @@ update-dotfiles-env() {
   if grep -q '^export DOTFILESD=' "$file"; then
     sed -i '' "s@^export DOTFILESD=.*\$@export DOTFILESD=\"$esc_p\"@" "$file"
   else
-    printf '\n# DOTFILESD is the directory where all the dotfiles repo is cloned\nexport DOTFILESD="%s"\n' "$p" >> "$file"
+    printf '\n# DOTFILESD is the directory where all the dotfiles repos are cloned\nexport DOTFILESD="%s"\n' "$p" >> "$file"
   fi
 
   echo "Updated DOTFILESD in $file → export DOTFILESD=\"$p\""
