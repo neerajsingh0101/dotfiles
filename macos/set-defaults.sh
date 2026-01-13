@@ -71,3 +71,18 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 # Enable lid wakeup. Meaning when laptop should wake up automatically when
 # lid is opened.
 sudo pmset -a lidwake 1
+
+# Disable the “power connected” chime (PowerChime)
+# This is the little ding you hear when plugging in a charger.
+# Safe to run multiple times.
+if [ "$(uname -s)" = "Darwin" ]; then
+  # Stop it if it's running (ignore error if not running)
+  killall PowerChime 2>/dev/null || true
+
+  # These defaults reliably suppress the chime
+  defaults write com.apple.PowerChime ChimeOnNoHardware -bool true
+  defaults write com.apple.PowerChime ChimeOnAllHardware -bool false
+
+  # Apply immediately
+  killall PowerChime 2>/dev/null || true
+fi
