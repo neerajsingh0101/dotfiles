@@ -23,3 +23,8 @@ ln -sfn "$DOTFILESD/symlinks/.psqlrc" "$HOME/.psqlrc"
 ./bin/update-dotfiles-env
 
 source ./brew.sh
+
+echo ""
+echo "Next: apply macOS defaults by running:"
+echo "  ./macos/set-defaults.sh"
+echo ""

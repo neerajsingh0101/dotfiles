@@ -59,11 +59,6 @@ defaults write com.apple.dock static-only -bool true
 # Disable the crash reporter
 defaults write com.apple.CrashReporter DialogType none
 
-# Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "neerajsingh0101"
-sudo scutil --set HostName "neerajsingh0101"
-sudo scutil --set LocalHostName "neerajsingh0101"
-
 # Always show scrollbars
 # Possible values: `WhenScrolling`, `Automatic` and `Always`
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
@@ -86,3 +81,39 @@ if [ "$(uname -s)" = "Darwin" ]; then
   # Apply immediately
   killall PowerChime 2>/dev/null || true
 fi
+
+# Set computer name (prompts for confirmation because this is user-specific)
+set_computer_name() {
+  current_cn="$(scutil --get ComputerName 2>/dev/null || echo "")"
+  current_hn="$(scutil --get HostName 2>/dev/null || echo "")"
+  current_lhn="$(scutil --get LocalHostName 2>/dev/null || echo "")"
+
+  echo ""
+  echo "Computer name settings are user-specific."
+  echo "Current:"
+  echo "  ComputerName : ${current_cn:-<not set>}"
+  echo "  HostName     : ${current_hn:-<not set>}"
+  echo "  LocalHostName: ${current_lhn:-<not set>}"
+  echo ""
+  echo "Proposed:"
+  echo "  ComputerName : neerajsingh0101"
+  echo "  HostName     : neerajsingh0101"
+  echo "  LocalHostName: neerajsingh0101"
+  echo ""
+
+  printf "Apply these name changes? [y/N] "
+  read ans
+  case "$ans" in
+    y|Y|yes|YES)
+      sudo scutil --set ComputerName "neerajsingh0101"
+      sudo scutil --set HostName "neerajsingh0101"
+      sudo scutil --set LocalHostName "neerajsingh0101"
+      echo "✓ Computer name updated."
+      ;;
+    *)
+      echo "↩ Skipped computer name changes."
+      ;;
+  esac
+}
+
+set_computer_name
