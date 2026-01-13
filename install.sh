@@ -19,42 +19,7 @@ ln -sfn "$DOTFILESD/symlinks/.gitconfig" "$HOME/.gitconfig"
 ln -sfn "$DOTFILESD/symlinks/.gitignore" "$HOME/.gitignore"
 ln -sfn "$DOTFILESD/symlinks/.psqlrc" "$HOME/.psqlrc"
 
-update-dotfiles-env() {
-  local link="$HOME/.dotfiles.env"
-  local file
-
-  # If it's a symlink, edit the target; otherwise edit the file itself
-  if [ -L "$link" ]; then
-    file="$(readlink "$link")"
-    # readlink may return a relative path; make it absolute relative to $HOME
-    case "$file" in
-      /*) : ;;
-      *) file="$HOME/$file" ;;
-    esac
-  else
-    file="$link"
-  fi
-
-  local p="$PWD"
-  p="${p/#$HOME/\$HOME}"   # make it literal $HOME/...
-
-  # Ensure target file exists
-  mkdir -p "$(dirname "$file")"
-  touch "$file"
-
-  # Escape for sed replacement
-  local esc_p="${p//\\/\\\\}"
-  esc_p="${esc_p//&/\\&}"
-
-  if grep -q '^export DOTFILESD=' "$file"; then
-    sed -i '' "s@^export DOTFILESD=.*\$@export DOTFILESD=\"$esc_p\"@" "$file"
-  else
-    printf '\n# DOTFILESD is the directory where all the dotfiles repos are cloned\nexport DOTFILESD="%s"\n' "$p" >> "$file"
-  fi
-
-  echo "Updated DOTFILESD in $file → export DOTFILESD=\"$p\""
-}
-
-update-dotfiles-env
+# Update DOTFILESD based on where install.sh is being run from
+./bin/update-dotfiles-env
 
 source ./brew.sh

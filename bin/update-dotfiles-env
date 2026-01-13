@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+#
+# This is invoked by install.sh.
+# This creates ~/.dotfiles.env and sets the value to what the
+# dotfiles directory of the user is.
+#
+set -euo pipefail
+
+link="${DOTFILES_ENV_LINK:-$HOME/.dotfiles.env}"
+
+# Directory to set as DOTFILESD (defaults to current working directory)
+target="${1:-$PWD}"
+
+# Make it literal $HOME/... for portability in the env file
+p="$target"
+p="${p/#$HOME/\$HOME}"
+
+# Resolve where we should actually write (follow symlink target if link is a symlink)
+file="$link"
+if [ -L "$link" ]; then
+  t="$(readlink "$link")"
+
+  # If readlink returns a relative path, it's relative to the symlink's directory
+  case "$t" in
+    /*) file="$t" ;;
+    *)
+      base_dir="$(dirname "$link")"
+      file="$base_dir/$t"
+      file="$(cd "$(dirname "$file")" && pwd)/$(basename "$file")"
+      ;;
+  esac
+fi
+
+mkdir -p "$(dirname "$file")"
+touch "$file"
+
+# sed -i compatibility: BSD sed (macOS) wants: -i '' ; GNU sed wants: -i
+if sed --version >/dev/null 2>&1; then
+  SED_INPLACE=(-i)
+else
+  SED_INPLACE=(-i '')
+fi
+
+# Escape for sed replacement
+esc_p="${p//\\/\\\\}"
+esc_p="${esc_p//&/\\&}"
+
+if grep -q '^export DOTFILESD=' "$file"; then
+  sed "${SED_INPLACE[@]}" "s@^export DOTFILESD=.*\$@export DOTFILESD=\"$esc_p\"@" "$file"
+else
+  printf '\n# DOTFILESD is the directory where all the dotfiles repo is cloned\nexport DOTFILESD="%s"\n' "$p" >> "$file"
+fi
+
+echo "Updated DOTFILESD in $file → export DOTFILESD=\"$p\""
