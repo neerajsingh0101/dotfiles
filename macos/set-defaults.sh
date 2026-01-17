@@ -95,20 +95,30 @@ set_computer_name() {
   echo "  HostName     : ${current_hn:-<not set>}"
   echo "  LocalHostName: ${current_lhn:-<not set>}"
   echo ""
+
+  printf "Enter the computer name to set (blank to skip): "
+  read -r new_name
+
+  if [ -z "$new_name" ]; then
+    echo "↩ Skipped computer name changes."
+    return 0
+  fi
+
+  echo ""
   echo "Proposed:"
-  echo "  ComputerName : neerajsingh0101"
-  echo "  HostName     : neerajsingh0101"
-  echo "  LocalHostName: neerajsingh0101"
+  echo "  ComputerName : $new_name"
+  echo "  HostName     : $new_name"
+  echo "  LocalHostName: $new_name"
   echo ""
 
   printf "Apply these name changes? [y/N] "
-  read ans
+  read -r ans
   case "$ans" in
     y|Y|yes|YES)
-      sudo scutil --set ComputerName "neerajsingh0101"
-      sudo scutil --set HostName "neerajsingh0101"
-      sudo scutil --set LocalHostName "neerajsingh0101"
-      echo "✓ Computer name updated."
+      sudo scutil --set ComputerName "$new_name"
+      sudo scutil --set HostName "$new_name"
+      sudo scutil --set LocalHostName "$new_name"
+      echo "✓ Computer name was updated."
       ;;
     *)
       echo "↩ Skipped computer name changes."
@@ -117,3 +127,7 @@ set_computer_name() {
 }
 
 set_computer_name
+
+echo ""
+echo "You are all set!"
+echo ""
