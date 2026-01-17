@@ -1,54 +1,70 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 #
 # This is invoked by install.sh.
-# This creates ~/.dotfiles.env and sets the value to what the
-# dotfiles directory of the user is.
+# This creates ~/.dotfiles.env and sets DOTFILESD to the user's dotfiles directory.
 #
-set -euo pipefail
+# Usage:
+#   ruby set_dotfiles_env.rb [target_dir]
+#   ./set_dotfiles_env.rb [target_dir]
+#
+# Environment:
+#   DOTFILES_ENV_LINK (optional) - defaults to ~/.dotfiles.env
 
-link="${DOTFILES_ENV_LINK:-$HOME/.dotfiles.env}"
+require "fileutils"
+
+def abort_with(msg, code: 1)
+  warn msg
+  exit code
+end
+
+home = Dir.home
+link = ENV["DOTFILES_ENV_LINK"] || File.join(home, ".dotfiles.env")
 
 # Directory to set as DOTFILESD (defaults to current working directory)
-target="${1:-$PWD}"
+target = ARGV[0] || Dir.pwd
 
 # Make it literal $HOME/... for portability in the env file
-p="$target"
-p="${p/#$HOME/\$HOME}"
+p = target.start_with?(home) ? target.sub(/\A#{Regexp.escape(home)}/, "$HOME") : target
 
 # Resolve where we should actually write (follow symlink target if link is a symlink)
-file="$link"
-if [ -L "$link" ]; then
-  t="$(readlink "$link")"
+file = link
+if File.symlink?(link)
+  t = File.readlink(link)
+  if t.start_with?("/")
+    file = t
+  else
+    base_dir = File.dirname(link)
+    file = File.expand_path(t, base_dir)
+  end
+end
 
-  # If readlink returns a relative path, it's relative to the symlink's directory
-  case "$t" in
-    /*) file="$t" ;;
-    *)
-      base_dir="$(dirname "$link")"
-      file="$base_dir/$t"
-      file="$(cd "$(dirname "$file")" && pwd)/$(basename "$file")"
-      ;;
-  esac
-fi
+# Ensure parent directory exists and file exists
+FileUtils.mkdir_p(File.dirname(file))
+FileUtils.touch(file)
 
-mkdir -p "$(dirname "$file")"
-touch "$file"
+replacement_line = %(export DOTFILESD="#{p}")
+lines = File.exist?(file) ? File.read(file).lines : []
 
-# sed -i compatibility: BSD sed (macOS) wants: -i '' ; GNU sed wants: -i
-if sed --version >/dev/null 2>&1; then
-  SED_INPLACE=(-i)
-else
-  SED_INPLACE=(-i '')
-fi
+found = false
+updated_lines = lines.map do |line|
+  if line.match?(/\Aexport DOTFILESD=/)
+    found = true
+    replacement_line + "\n"
+  else
+    line
+  end
+end
 
-# Escape for sed replacement
-esc_p="${p//\\/\\\\}"
-esc_p="${esc_p//&/\\&}"
+unless found
+  updated_lines << "\n" unless updated_lines.last&.end_with?("\n") || updated_lines.empty?
+  updated_lines << "# DOTFILESD is the directory where all the dotfiles repo is cloned\n"
+  updated_lines << replacement_line + "\n"
+end
 
-if grep -q '^export DOTFILESD=' "$file"; then
-  sed "${SED_INPLACE[@]}" "s@^export DOTFILESD=.*\$@export DOTFILESD=\"$esc_p\"@" "$file"
-else
-  printf '\n# DOTFILESD is the directory where all the dotfiles repo is cloned\nexport DOTFILESD="%s"\n' "$p" >> "$file"
-fi
+# Write atomically to avoid partial writes
+tmp = "#{file}.tmp.#{$$}"
+File.write(tmp, updated_lines.join)
+FileUtils.mv(tmp, file)
 
-echo "Updated DOTFILESD in $file → export DOTFILESD=\"$p\""
+puts %(Updated DOTFILESD in #{file} \u2192 #{replacement_line})
