@@ -1,12 +1,12 @@
 # Load dotfiles.env
 [ -f "$HOME/.dotfiles.env" ] && source "$HOME/.dotfiles.env"
 
-# Put your environment variables in ~/.localdotfile. It means they'll stay out
-# of your main dotfiles repository (which may be public, like this one), but
+# Put private environment variables in ~/.dotfiles.local. It means they'll stay out
+# of main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.
-if [[ -a ~/.localdotfile ]]
+if [[ -a ~/.dotfiles.local ]]
 then
-  source ~/.localdotfile
+  source ~/.dotfiles.local
 fi
 
 # Get all the .zshrc files and source them
