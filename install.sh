@@ -13,13 +13,34 @@ set -e
 # Load dotfiles.env
 [ -f "$HOME/.dotfiles.env" ] && source "$HOME/.dotfiles.env"
 
-ln -sfn "$DOTFILESD/zsh/zshrc" "$HOME/.zshrc"
+# Remove destination (file/symlink/dir) and recreate symlink
+link_force() {
+  src="$1"
+  dst="$2"
 
-ln -sfn "$DOTFILESD/symlinks/.gemrc" "$HOME/.gemrc"
-ln -sfn "$DOTFILESD/symlinks/.irbrc" "$HOME/.irbrc"
-ln -sfn "$DOTFILESD/symlinks/.gitconfig" "$HOME/.gitconfig"
-ln -sfn "$DOTFILESD/symlinks/.gitignore" "$HOME/.gitignore"
-ln -sfn "$DOTFILESD/symlinks/.psqlrc" "$HOME/.psqlrc"
+  if [ -z "$src" ] || [ -z "$dst" ]; then
+    echo "Usage: link_force <src> <dst>" >&2
+    return 1
+  fi
+
+  if [ ! -e "$src" ] && [ ! -L "$src" ]; then
+    echo "Missing source: $src" >&2
+    return 1
+  fi
+
+  rm -rf -- "$dst"
+  ln -s -- "$src" "$dst"
+}
+
+# Usage
+link_force "$DOTFILESD/zsh/zshrc"          "$HOME/.zshrc"
+link_force "$DOTFILESD/zsh/dotfiles.env"   "$HOME/.dotfiles.env"
+
+link_force "$DOTFILESD/symlinks/.gemrc"    "$HOME/.gemrc"
+link_force "$DOTFILESD/symlinks/.irbrc"    "$HOME/.irbrc"
+link_force "$DOTFILESD/symlinks/.gitconfig" "$HOME/.gitconfig"
+link_force "$DOTFILESD/symlinks/.gitignore" "$HOME/.gitignore"
+link_force "$DOTFILESD/symlinks/.psqlrc"   "$HOME/.psqlrc"
 
 source ./brew.sh
 
