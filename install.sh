@@ -14,6 +14,7 @@ set -e
 [ -f "$HOME/.dotfiles.env" ] && source "$HOME/.dotfiles.env"
 
 # Remove destination (file/symlink/dir) and recreate symlink
+# If dst is a real file (not a symlink), back it up first
 link_force() {
   src="$1"
   dst="$2"
@@ -28,7 +29,15 @@ link_force() {
     return 1
   fi
 
-  rm -rf -- "$dst"
+  # Backup dst if it's a real file (not a symlink)
+  if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+    backup="${dst}-bkp-$(date +%Y%m%d%H%M%S)"
+    echo "Backing up $dst to $backup"
+    mv -- "$dst" "$backup"
+  else
+    rm -rf -- "$dst"
+  fi
+
   ln -s -- "$src" "$dst"
 }
 
