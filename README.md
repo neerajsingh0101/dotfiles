@@ -15,3 +15,6 @@
 * Using Atuin:
 * Using z:
 * listhing things: `ll`, `la`
+* Command `dotfiles` opend up dotfiles.
+* Command `dotfilesd` will get you to the directory of dotfiles.
+
