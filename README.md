@@ -11,6 +11,9 @@
 
 # Highlights
 
+* cd a few times but after that you can just type `z bigbinary` and it will take you to
+   `~/code/bigbinary-stuff/bigbinary-website`. With the usage of `z` you don't have to type
+   the full path. More info at https://github.com/ajeetdsouza/zoxide.
 * Git usage: `gs`, `gap`, `gp`, `gpl`, `gcm`
 * Using Atuin:
 * Using z:
