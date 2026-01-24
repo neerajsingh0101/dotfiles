@@ -45,10 +45,11 @@ link_force "$DOTFILESD/zsh/zshrc"          "$HOME/.zshrc"
 link_force "$DOTFILESD/zsh/dotfiles.env"   "$HOME/.dotfiles.env"
 
 link_force "$DOTFILESD/symlinks/.gemrc"    "$HOME/.gemrc"
-link_force "$DOTFILESD/symlinks/.irbrc"    "$HOME/.irbrc"
 link_force "$DOTFILESD/symlinks/.gitconfig" "$HOME/.gitconfig"
 link_force "$DOTFILESD/symlinks/.gitignore" "$HOME/.gitignore"
+link_force "$DOTFILESD/symlinks/.irbrc"    "$HOME/.irbrc"
 link_force "$DOTFILESD/symlinks/.psqlrc"   "$HOME/.psqlrc"
+link_force "$DOTFILESD/symlinks/.wezterm.lua"   "$HOME/.wezterm.lua"
 
 ruby ./bin/update-gitconfig-local.rb
 

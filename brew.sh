@@ -43,4 +43,5 @@ cask_install whatsapp
 cask_install visual-studio-code
 cask_install zoom
 cask_install iterm2
+cask_install wezterm
 cask_install meetingbar
