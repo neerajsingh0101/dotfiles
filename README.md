@@ -8,7 +8,7 @@
 
 # Wezterm
 * Open wezterm instead of terminal or iterm.
-* Ctrl + Option converns wezterm
+* Ctrl + Option gonverns wezterm
 * Ctrl + Option + i -> split in two left hand side and right hand side
 * Ctrl + Option + u -> split in two top side and bottom side
 * Ctrl + Option + h -> navigatge to left pane
@@ -28,7 +28,7 @@
    the full path. More info at https://github.com/ajeetdsouza/zoxide.
 * Git usage: `gs`, `gap`, `gp`, `gpl`, `gcm`, `gr`
 * Using Atuin:
-* listhing things: `ll`, `la`
+* listing things: `ls`,`ll`, `la`
 * Command `dotfiles` opens up dotfiles.
 * Command `dotfilesd` will get you to the directory of dotfiles.
 
