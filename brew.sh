@@ -51,4 +51,4 @@ cask_install meetingbar
 
 brew install font-hack-nerd-font
 
-brew install --cask nikitabobko/tap/aerospace
+# brew install --cask nikitabobko/tap/aerospace
