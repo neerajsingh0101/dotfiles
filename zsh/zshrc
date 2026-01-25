@@ -11,7 +11,7 @@ fi
 
 ######## HISTORY SETUP ######################
 
-# tell zsh where to store your command history
+# tell zsh where to store command history
 HISTFILE=$HOME/.zhistory
 
 # store last ten thousand history commands
@@ -37,7 +37,10 @@ setopt hist_ignore_dups
 setopt hist_verify
 
 
-# completion using arrow keys (based on history)
+# Remap what Up and Down arrows do in Zsh.
+# ^[ means the ESC character. So ^[[A is literally: ESC, [, A.
+# ^[[A = Up arrow
+# ^[[B = Down arrow
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
@@ -92,7 +95,8 @@ uniqlines() {
 
 # if condition is checking if homebrew is installed or not
 # `brew shellenv`` prints a bunch of shell commands like export PATH=..., export HOMEBREW_PREFIX=..., etc.
-# eval "$( ... )" executes those printed commands in your current shell.
+# that sets your environment so your shell can “find Homebrew” (and the stuff you install with it) in the right places.
+# eval "$( ... )" executes those printed commands in the current shell.
 if command -v brew >/dev/null; then
   eval "$(brew shellenv)"
 fi
@@ -112,9 +116,6 @@ sysinfo() {
   echo
   system_profiler SPDisplaysDataType
 }
-
-# Away From Keyboard (AFK) - Start screen saver
-alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
 
 # Copy pwd to clipboard
 pwdd(){ local dir="$PWD"; print -rn -- "$dir" | pbcopy; echo "copied: $dir to clipboard."; }

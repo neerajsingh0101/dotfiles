@@ -16,12 +16,11 @@ then
 fi
 
 # Easier navigation: .., ..., ~ and -
-alias ..="cd .."
 alias cd..="cd .."
+alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-
 
 # open VSCode from the present directory
 alias c="code ."
@@ -38,3 +37,6 @@ alias dotfiles="code $DOTFILESD" # open dotfiles
 
 # take me to the dotfiles directory
 alias dotfilesd="cd $DOTFILESD" # open dotfiles
+
+# Away From Keyboard (AFK) - Start screen saver
+alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
