@@ -31,10 +31,9 @@ local pane_resize_keys = {
   right = "RightArrow",
 }
 
--- Try to load local overrides (NOT committed)
+-- Local override by trying to load wezterm_local.lua
 local ok, local_overrides = pcall(require, "wezterm_local")
 if ok and type(local_overrides) == "table" and type(local_overrides.pane_resize_keys) == "table" then
-  -- Override only what is provided
   pane_resize_keys.left  = local_overrides.pane_resize_keys.left  or pane_resize_keys.left
   pane_resize_keys.right = local_overrides.pane_resize_keys.right or pane_resize_keys.right
 end
@@ -91,14 +90,12 @@ config.keys = {
   },
   -- Resize panes
   {
-    --key = 'LeftArrow',
-    key = '9', -- stands for (
+    key = pane_resize_keys.left,
     mods = 'CTRL|ALT',
     action = wezterm.action.AdjustPaneSize { 'Left', 5 },
   },
   {
-    --key = 'RightArrow',
-    key = '0', -- stands for )
+    key = pane_resize_keys.right,
     mods = 'CTRL|ALT',
     action = wezterm.action.AdjustPaneSize { 'Right', 5 },
   },
