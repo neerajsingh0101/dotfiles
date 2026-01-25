@@ -58,8 +58,13 @@ fi
 
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Get all the .zshrc files and source them
-for f in $DOTFILESD/**/*.zshrc(.); do source "$f"; done
+# Source zshrc files
+source "$DOTFILESD/atuin/eval.zshrc"
+source "$DOTFILESD/git/aliases.zshrc"
+source "$DOTFILESD/zoxide/eval.zshrc"
+source "$DOTFILESD/zsh/prompt.zshrc"
+source "$DOTFILESD/zsh/aliases.zshrc"
+source "$DOTFILESD/zsh/utils.zshrc"
 
 # Add bin folder to PATH
 export PATH="$DOTFILESD/bin:$PATH"
