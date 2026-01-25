@@ -64,35 +64,6 @@ for f in $DOTFILESD/**/*.zshrc(.); do source "$f"; done
 # Add bin folder to PATH
 export PATH="$DOTFILESD/bin:$PATH"
 
-# tree but only print directories
-# by default the depth level is 1 but an argument can be passed
-# treed 3 - to have three levels of depth
-treed() {
-  tree -AdL ${1:-1}
-}
-
-# Create a new directory and enter it
-mk() {
-  mkdir -p "$@" && cd "$@"
-}
-
-# cd into latest created directory
-# this is needed because I keep forgetting to use mk
-cdl() {
-  cd "$(ls -dt */ | head -n 1)"
-}
-
-# List only duplicate lines
-duplines() {
-  sort $1 | uniq -d
-}
-
-# List only unique lines
-uniqlines() {
-  sort $1 | uniq -u
-}
-
-
 # if condition is checking if homebrew is installed or not
 # `brew shellenv`` prints a bunch of shell commands like export PATH=..., export HOMEBREW_PREFIX=..., etc.
 # that sets your environment so your shell can “find Homebrew” (and the stuff you install with it) in the right places.
