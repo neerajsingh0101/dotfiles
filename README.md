@@ -33,17 +33,28 @@ tool I learned a lot. This dotfile, I hope, is a good default for people to get 
 * Ctrl + Option + left arrow -> resize the pane and move left
 * Ctrl + Option + right arrow -> resize the pane and move right
 
-# Highlights
 
-* Usage of `z` command: https://neerajsingh0909.neetorecord.com/watch/c75ffff803ac46963f7d
-* Using Atuin: https://neerajsingh0909.neetorecord.com/watch/446ad749cd466d5db54b
-* listing things: `ls`,`ll`, `la` https://neerajsingh0909.neetorecord.com/watch/dd8d9bba322b10a3e9b4
-* fkill: https://neerajsingh0909.neetorecord.com/watch/d958a719c843d692e732
-* Git usage: `gs`, `gap`, `gp`, `gpl`, `gcm`, `gr`
+### z command
+`z` is a smarter `cd` command. It comes from [zoxide](https://github.com/ajeetdsouza/zoxide).
+https://neerajsingh0909.neetorecord.com/watch/c75ffff803ac46963f7d
+
+### Atuin
+https://neerajsingh0909.neetorecord.com/watch/446ad749cd466d5db54b
+
+### Listing things
+`ls`,`ll`, `la` https://neerajsingh0909.neetorecord.com/watch/dd8d9bba322b10a3e9b4
+
+### fkill
+https://neerajsingh0909.neetorecord.com/watch/d958a719c843d692e732
+
+### Git usage
+`gs`, `gap`, `gp`, `gpl`, `gcm`, `gr`
+
+### sysinfo
 * `sysinfo` lists info about your laptop.
-* Command `dotfiles` opens up dotfiles.
-* Command `dotfilesd` will get you to the directory of dotfiles.
-* This `zshrc` file loads `~/.dotfiles.local` if it exists. Use this file for private information like environment variables that shouldn't be committed to the repo.
+
+### Override with dotfiles.local
+This `zshrc` file loads `~/.dotfiles.local` if it exists. Use this file for private information like environment variables that shouldn't be committed to the repo.
 
 # Overrides for Neeraj
 
