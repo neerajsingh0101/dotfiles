@@ -27,3 +27,11 @@ duplines() {
 uniqlines() {
   sort $1 | uniq -u
 }
+
+# Show system information
+sysinfo() {
+  echo "CPU: $(sysctl -n machdep.cpu.brand_string)"
+  echo "RAM: $(top -l 1 -s 0 | grep PhysMem | sed 's/^[[:space:]]*//')"
+  echo
+  system_profiler SPDisplaysDataType
+}
