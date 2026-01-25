@@ -31,3 +31,17 @@
 * listhing things: `ll`, `la`
 * Command `dotfiles` opens up dotfiles.
 * Command `dotfilesd` will get you to the directory of dotfiles.
+
+
+# Overrides for Neeraj
+
+Have a `wezterm_local.lua` file next to `.wezterm.lua` with the following content.
+
+```
+return {
+  pane_resize_keys = {
+    left = "9",  -- your special keyboard emits this for left
+    right = "0", -- your special keyboard emits this for right
+  },
+}
+```

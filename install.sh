@@ -49,10 +49,13 @@ link_force "$DOTFILESD/symlinks/.gitconfig" "$HOME/.gitconfig"
 link_force "$DOTFILESD/symlinks/.gitignore" "$HOME/.gitignore"
 link_force "$DOTFILESD/symlinks/.irbrc"    "$HOME/.irbrc"
 link_force "$DOTFILESD/symlinks/.psqlrc"   "$HOME/.psqlrc"
-link_force "$DOTFILESD/symlinks/.wezterm.lua"   "$HOME/.wezterm.lua"
-mkdir -p "$HOME/.config/wezterm"
-link_force "$DOTFILESD/symlinks/wezterm_local.lua"   "$HOME/.config/wezterm/wezterm_local.lua"
 link_force "$DOTFILESD/symlinks/.aerospace.toml"   "$HOME/.aerospace.toml"
+link_force "$DOTFILESD/symlinks/.wezterm.lua"   "$HOME/.wezterm.lua"
+
+if [ -f "$DOTFILESD/symlinks/wezterm_local.lua" ]; then
+  mkdir -p "$HOME/.config/wezterm"
+  link_force "$DOTFILESD/symlinks/wezterm_local.lua"   "$HOME/.config/wezterm/wezterm_local.lua"
+fi
 
 ruby ./bin/update-gitconfig-local.rb
 
