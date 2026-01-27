@@ -62,7 +62,7 @@ ruby ./bin/update-gitconfig-local.rb
 # Check if Homebrew is installed before running brew.sh
 if ! command -v brew &> /dev/null; then
   echo "Error: Homebrew is not installed." >&2
-  echo "Please install Homebrew first: https://brew.sh" >&2
+  echo "Please install Homebrew. Visit https://brew.sh to see instructions." >&2
   exit 1
 fi
 
