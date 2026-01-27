@@ -20,7 +20,7 @@ brew install gh        # GitHub CLI
 brew install jq
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
-brew rbenv
+brew install rbenv
 
 # try install; if it fails due to an existing app, adopt; if adopt fails, force.
 cask_install() {
