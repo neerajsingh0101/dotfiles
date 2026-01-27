@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Add a GitHub user as a collaborator to a repository.
+# Works with both personal and organization repositories.
+#
+# Usage: gadd-user <owner/repo> <github-username>
+#
+# Example: gadd-user neerajsingh0101/bb-academy-content someuser
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Error: Both project and username are required"
+  echo "Usage: $0 <owner/repo> <github-username>"
+  echo "Example: $0 neerajsingh0101/bb-academy-content someuser"
+  exit 1
+fi
+
+PROJECT="$1"
+USERNAME="$2"
+
+echo "Adding $USERNAME as collaborator to $PROJECT..."
+gh api "repos/$PROJECT/collaborators/$USERNAME" -X PUT
+
+if [ $? -eq 0 ]; then
+  echo "Invitation sent to $USERNAME for $PROJECT"
+else
+  echo "Failed to add collaborator"
+  exit 1
+fi
