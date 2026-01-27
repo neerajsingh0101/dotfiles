@@ -8,7 +8,7 @@
 set -e
 
 # Update DOTFILESD based on where install.sh is being run from
-./bin/update-dotfiles-env
+./bin/create-dotfiles-env
 
 # Load dotfiles.env
 [ -f "$HOME/.dotfiles.env" ] && source "$HOME/.dotfiles.env"
@@ -59,7 +59,7 @@ fi
 
 ruby ./bin/update-gitconfig-local.rb
 
-# source ./brew.sh
+source ./brew.sh
 
 echo ""
 echo "Next: apply macOS defaults by running:"
