@@ -1,12 +1,12 @@
 # Setting up Mac laptop
 
-The goal of this writeup is to provide others with a good default to start with.
-That's it. A good place to start with sensible defaults. Once you get started
-then you should make changes to suit your working style.
+The goal of this writeup is to provide sensible defaults to get started with.
+Once you have started using a particular tool you should customize the tool to
+match your working style.
 
-I have covered the most important app [Raycast](https://www.raycast.com/) because
-that takes the maximum space. Before that let me go through some of the smallar Mac apps
-I like.
+
+I have covered the most important app [Raycast](https://www.raycast.com/) at the very end because
+that takes the maximum space. Before that let me go through some of the other items.
 
 ## Emoji app
 
