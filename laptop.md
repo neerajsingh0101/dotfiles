@@ -73,6 +73,9 @@ If you want to get to Slack app then you don't have to cycle through all open ap
 * Ctrl + w -> Whatsapp
 * Ctrl + d -> downloads in finder
 * Ctrl + z -> Wezterm
+* Ctrl + n -> Apple notes
+* Ctrl + o -> Obsidian
+
 
 #### Resizing screens
 
