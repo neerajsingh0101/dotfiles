@@ -82,26 +82,26 @@ much easier to reach `h j k l` than arrows.
 If you are not familar with vim then these keys might take a while to get used to it but don't get discouraged. Once you have masterd them
 then you would be flyging through your windows magically. Here are general settings in vim.
 
-h -> go left
-j -> go down
-k -> go up
-l -> go right
+* h -> go left
+* j -> go down
+* k -> go up
+* l -> go right
 
 These keys combined with Ctrl makes your screen move. Open Apple notes and hit `Ctrl + h`. See what happens.
 
-Ctrl + h -> take left half of the vertical screen
-Ctrl + j -> take bottom half of the horizontal screen
-Ctrl + k -> take top half of the vertical screen
-Ctrl + l -> take the right half of the vertical screen
+* Ctrl + h -> take left half of the vertical screen
+* Ctrl + j -> take bottom half of the horizontal screen
+* Ctrl + k -> take top half of the vertical screen
+* Ctrl + l -> take the right half of the vertical screen
 
 If you want to take 1/4th and not half then add Alt key.
 
-Ctrl + Alt +  h -> take left 25% of the vertical screen
-Ctrl + Alt + j -> take bottom 25% of the horizontal screen
-Ctrl + Alt + k -> take top 25% of the vertical screen
-Ctrl + Alt + l -> take the right 25% of the vertical screen
+* Ctrl + Alt +  h -> take left 25% of the vertical screen
+* Ctrl + Alt + j -> take bottom 25% of the horizontal screen
+* Ctrl + Alt + k -> take top 25% of the vertical screen
+* Ctrl + Alt + l -> take the right 25% of the vertical screen
 
-Ctrl + m -> to maximize any application in the given monitor
+* Ctrl + m -> to maximize any application in the given monitor
 
 ### Multiple monitor
 
