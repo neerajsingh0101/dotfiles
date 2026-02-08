@@ -120,6 +120,19 @@ config.keys = {
     mods = 'CTRL|ALT',
     action = wezterm.action.AdjustPaneSize { 'Down', 5 },
   },
+  -- Rename tab
+  {
+    key = 'r',
+    mods = 'CTRL|ALT',
+    action = wezterm.action.PromptInputLine {
+      description = 'Enter new tab name',
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    },
+  },
 }
 
 -- Dim the inactive pane so that we can detect the active pane
@@ -135,7 +148,13 @@ end
 -- Set the tab title to currently running foreground process name
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local pane = tab.active_pane
-	local title = basename(pane.foreground_process_name) .. " " .. (tab.tab_index + 1)
+	local tab_title = tab.tab_title
+	local title
+	if tab_title and #tab_title > 0 then
+		title = tab_title
+	else
+		title = basename(pane.foreground_process_name) .. " " .. (tab.tab_index + 1)
+	end
 	local color = "#0f1419"
 	if tab.is_active then
 		color = "darkblue"

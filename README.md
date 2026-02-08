@@ -29,6 +29,7 @@ A simple dotfile that gives sensible defaults, is fast and looks beautiful out o
 * Ctrl + Option + down arrow -> resize the pane and move down
 * Ctrl + Option + left arrow -> resize the pane and move left
 * Ctrl + Option + right arrow -> resize the pane and move right
+* By default the tab name is the name of the running process. Press Ctrl + Alt + r to rename the tab.
 
 # z command
 `z` is a smarter `cd` command. It comes from [zoxide](https://github.com/ajeetdsouza/zoxide).
