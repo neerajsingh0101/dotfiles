@@ -151,7 +151,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	local tab_title = tab.tab_title
 	local title
 	if tab_title and #tab_title > 0 then
-		title = tab_title
+		title = tab_title .. " " .. (tab.tab_index + 1)
 	else
 		title = basename(pane.foreground_process_name) .. " " .. (tab.tab_index + 1)
 	end
