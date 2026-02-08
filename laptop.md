@@ -50,9 +50,9 @@ it should be the default feature of Mac and Apple should ship it out of the box.
 
 Visit [Raycast exports](https://www.dropbox.com/scl/fo/5zwdp2ydu0ca0l4lkxe0w/APQ_dCDs0PgH6e3_zeodLPM?rlkey=vvex28wd4nlnj9y14sgwf1ex5&dl=0) and look for the most recent export. Download the file.
 
-Open Raycast. Hit Command + `,`. Click on **Advanced** tab. Scroll down and click on **Import**. Import the downloaded file in the previous step.
+Open Raycast. Hit Command + `,`. Click on **Advanced** tab. Scroll down and click on **Import**. Import the file downloaded in the previous step. Password is `welcome1234`.
 
-Now you should be ready to use Raycast with all the Settings of Neeraj. The whole point of importing the settings was to start with sensible defaults. As you learn more about Raycast you should change the settings to match your working style.
+You should now be ready to use Raycast with all the settings from Neeraj. The whole point of importing the settings was to start with sensible defaults. As you learn more about Raycast you should change the settings to match your working style.
 
 Here is what your Raycast can do now.
 
