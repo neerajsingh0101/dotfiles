@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local mux = wezterm.mux
 local config = wezterm.config_builder()
 
 config.initial_cols = 120
@@ -13,7 +14,7 @@ config.line_height = 1.1
 config.color_scheme = 'Catppuccin Mocha'  -- Choose one color scheme
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 config.tab_bar_at_bottom = true
 config.window_padding = {
   left = 10,
@@ -21,6 +22,16 @@ config.window_padding = {
   top = 8,
   bottom = 8,
 }
+
+-- maximize all displayed windows on launch of wezterm
+wezterm.on("gui-attached", function(domain)
+	local workspace = mux.get_active_workspace()
+	for _, window in ipairs(mux.all_windows()) do
+		if window:get_workspace() == workspace then
+			window:gui_window():maximize()
+		end
+	end
+end)
 
 -- Disable quit confirmation
 config.window_close_confirmation = 'NeverPrompt'
