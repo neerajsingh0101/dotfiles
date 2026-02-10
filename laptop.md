@@ -44,6 +44,12 @@ Rocket by default disables the trigger key `:` in applications like `Terminal` a
 wezterm then you should add wezterm to this list. Click on Rocket application from the top menu bar. Click on
 "Preferences". Add wezterm to the list of "Disable apps".
 
+## Hidden bar
+
+[Hideen bar](https://apps.apple.com/us/app/hidden-bar/id1452453066?mt=12) is a free and open source Mac app
+that helps clean up the menus. [Here](https://www.youtube.com/watch?v=EHeg_onNDr8) is a YouTube video with all the information.
+On Reddit a lot of people complain that the software has not been updated in the last 5 years. I consider this a
+positive sign. It indicates that the software is mature and stable. [Here](https://github.com/dwarvesf/hidden) is link to GitHub repo.
 
 ## Raycast
 
