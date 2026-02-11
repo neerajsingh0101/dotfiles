@@ -54,40 +54,40 @@ config.keys = {
   -- Split (left/right)
   {
     key = 'i',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
   },
   -- Split (top/bottom)
   {
     key = 'u',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
   },
-  -- Navigate between panes with Ctrl+Alt keys
+  -- Navigate between panes with Shift+Ctrl keys
   {
     key = 'h',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.ActivatePaneDirection 'Left',
   },
   {
     key = 'l',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.ActivatePaneDirection 'Right',
   },
   {
     key = 'k',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.ActivatePaneDirection 'Up',
   },
   {
     key = 'j',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.ActivatePaneDirection 'Down',
   },
   -- Close current pane
   {
     key = 'w',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.CloseCurrentPane { confirm = true },
   },
   -- Command K to clear the console
@@ -102,28 +102,28 @@ config.keys = {
   -- Resize panes
   {
     key = pane_resize_keys.left,
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.AdjustPaneSize { 'Left', 5 },
   },
   {
     key = pane_resize_keys.right,
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.AdjustPaneSize { 'Right', 5 },
   },
   {
     key = 'UpArrow',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.AdjustPaneSize { 'Up', 5 },
   },
   {
     key = 'DownArrow',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.AdjustPaneSize { 'Down', 5 },
   },
   -- Rename tab
   {
     key = 'r',
-    mods = 'CTRL|ALT',
+    mods = 'SHIFT|CTRL',
     action = wezterm.action.PromptInputLine {
       description = 'Enter new tab name',
       action = wezterm.action_callback(function(window, pane, line)
