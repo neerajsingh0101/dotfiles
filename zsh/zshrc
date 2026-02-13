@@ -86,7 +86,6 @@ alias gpl='git pull --prune'
 
 alias gwip='git add . && git commit -m "wip"'
 
-
 # prefer eza
 alias ls="eza --icons=always"
 alias ll='eza --classify=auto --color -l --icons=always'
@@ -95,12 +94,8 @@ alias la='eza --classify=auto --color -a -l --icons=always'
 # Easy way to copy publick key to the clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
-# GRC colorizes logfiles and command output
-# https://stackoverflow.com/questions/25183624/grc-bashrc-no-such-file-or-directory
-if (( $+commands[grc] )) && (( $+commands[brew] ))
-then
-  source `brew --prefix`/etc/grc.bashrc
-fi
+alias cld="claude"
+alias cldd="claude --dangerously-skip-permissions"
 
 # Easier navigation
 alias cd..="cd .."
@@ -128,6 +123,13 @@ alias dotfilesd="cd $DOTFILESD" # open dotfiles
 # Away From Keyboard (AFK) - Start screen saver
 alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
 
+# GRC colorizes logfiles and command output
+# https://stackoverflow.com/questions/25183624/grc-bashrc-no-such-file-or-directory
+if (( $+commands[grc] )) && (( $+commands[brew] ))
+then
+  source `brew --prefix`/etc/grc.bashrc
+fi
+
 # Add bin folder to PATH
 export PATH="$DOTFILESD/bin:$PATH"
 
@@ -152,7 +154,6 @@ eval "$(rbenv init - zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 # nvm doesn’t auto-switch Node versions just because you “entered a folder”.
 # By default, nvm only changes Node when you explicitly tell it to (like nvm use 22.13)
