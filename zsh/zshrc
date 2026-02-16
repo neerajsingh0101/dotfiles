@@ -118,6 +118,7 @@ alias dotfiles="code $DOTFILESD" # open dotfiles
 alias dotfilesd="cd $DOTFILESD" # open dotfiles
 
 # neeto repos
+alias neetozone="cd ~/code/neetozone"
 alias authw="cd ~/code/neetozone/neeto-auth-web"
 alias formw="cd ~/code/neetozone/neeto-form-web"
 alias calw="cd ~/code/neetozone/neeto-cal-web"
