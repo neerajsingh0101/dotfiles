@@ -33,3 +33,14 @@ else
 }
 EOF
 fi
+
+# Install rbenv if not already installed
+if ! command -v rbenv &> /dev/null; then
+  echo "Installing rbenv..."
+  brew install rbenv ruby-build
+fi
+
+# Install Ruby 3.3.10 and set as global default
+echo "Installing Ruby 3.3.10..."
+rbenv install -s 3.3.10
+rbenv global 3.3.10

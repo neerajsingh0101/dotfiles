@@ -15,6 +15,10 @@ for Raycast.
 
 Follow the instructions mentioned at [README](https://github.com/neerajsingh0101/dotfiles/blob/main/README.md) to setup your dotfiles.
 
+# Setup SSH key in GitHub
+
+Execute `./bin/setup_github_ssh_key`.
+
 # Setup laptop
 
 Open Wezterm and execute `./bin/setup-laptop`.
