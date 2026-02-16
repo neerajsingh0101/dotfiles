@@ -2,28 +2,30 @@
 
 * [Introduction](#introduction)
 * [dotfiles](#dotfiles)
-* [Mac defaults](#mac-defaults)
+* [Setup laptop](#setup-laptop)
+* [Customize Macos](#customize-macos)
 * [Mac applications](#mac-applications)
 
 # Introduction
 
-The goal of this writeup is to provide sensible defaults to get started with.
-Once you have started using a particular tool you should customize the tool to
-match your working style.
+The goal of this writeup is to provide sensible defaults to setup your Mac starting from good default prompts to sensible defaults
+for Raycast.
 
 # dotfiles
 
-If you are using a Mac and you are developer then you should use the
-[dotfiles](https://github.com/neerajsingh0101/dotfiles) to setup your laptop.
+Follow the instructions mentioned at [README](https://github.com/neerajsingh0101/dotfiles/blob/main/README.md) to setup your dotfiles.
 
-# Mac defaults
+# Setup laptop
+
+Open Wezterm and execute `./bin/setup-laptop`.
+
+# Customize Macos
 
 I don't like when Mac boots then it makes a sound. So I decided to turn off that feature.
 Similarly I don't like the warning that comes up when I'm deleting items in trash.
 
 All such configurations and more can be done [here](https://github.com/neerajsingh0101/dotfiles/blob/main/bin/customize-macos).
-Once you have made the changes then go to the root folder and execute `./bin/customize-macos`. See
-README for more information.
+Once you have made the changes then go to the root folder and execute `./bin/customize-macos`.
 
 # Mac applications
 
