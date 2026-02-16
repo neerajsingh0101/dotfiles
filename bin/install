@@ -89,6 +89,7 @@ brew install zsh-syntax-highlighting
 brew install rbenv
 brew install aicommits
 brew install postgresql@18
+brew install redis
 
 # try install; if it fails due to an existing app, adopt; if adopt fails, force.
 cask_install() {
