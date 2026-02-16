@@ -2,7 +2,7 @@
 #
 # Sets reasonable macOS defaults.
 #
-# Run ./set-defaults.sh and you'll be good to go.
+# Run ./bin/customize-macos and you'll be good to go.
 
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
@@ -129,6 +129,30 @@ set_computer_name() {
       ;;
   esac
 }
+
+# VS Code settings
+VSCODE_SETTINGS="$HOME/Library/Application Support/Code/User/settings.json"
+if [ -f "$VSCODE_SETTINGS" ]; then
+  python3 -c "
+import json, sys
+with open(sys.argv[1]) as f:
+    data = json.load(f)
+data['files.autoSave'] = 'afterDelay'
+data['files.autoSaveDelay'] = 1000
+with open(sys.argv[1], 'w') as f:
+    json.dump(data, f, indent=2)
+" "$VSCODE_SETTINGS"
+  echo "✓ VS Code settings updated"
+else
+  mkdir -p "$(dirname "$VSCODE_SETTINGS")"
+  cat > "$VSCODE_SETTINGS" << 'EOF'
+{
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000
+}
+EOF
+  echo "✓ VS Code settings.json created"
+fi
 
 set_computer_name
 

@@ -21,8 +21,8 @@ If you are using a Mac and you are developer then you should use the
 I don't like when Mac boots then it makes a sound. So I decided to turn off that feature.
 Similarly I don't like the warning that comes up when I'm deleting items in trash.
 
-All such configurations and more can be done [here](https://github.com/neerajsingh0101/dotfiles/blob/main/macos/set-defaults.sh).
-Once you have made the changes then go to the root folder and execute `./macos/set-defaults.sh`. See
+All such configurations and more can be done [here](https://github.com/neerajsingh0101/dotfiles/blob/main/bin/customize-macos).
+Once you have made the changes then go to the root folder and execute `./bin/customize-macos`. See
 README for more information.
 
 # Mac applications

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -e
+
+# Install Xcode Command Line Tools if not already installed
+if ! xcode-select -p &> /dev/null; then
+  echo "Installing Xcode Command Line Tools..."
+  xcode-select --install
+  echo "Please wait for the installation to complete, then re-run this script."
+  exit 0
+fi
+
+# Install nvm if not already installed
+if [ ! -d "$HOME/.nvm" ]; then
+  echo "Installing nvm..."
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+fi
+
+brew install yarn
+
+# Install VS Code extensions
+code --install-extension esbenp.prettier-vscode
+
+# VS Code: format JavaScript files on save using Prettier
+VSCODE_SETTINGS="$HOME/Library/Application Support/Code/User/settings.json"
+if [ -f "$VSCODE_SETTINGS" ]; then
+  python3 -c "
+import json, sys
+with open(sys.argv[1]) as f:
+    data = json.load(f)
+data['[javascript]'] = {'editor.formatOnSave': True}
+with open(sys.argv[1], 'w') as f:
+    json.dump(data, f, indent=2)
+" "$VSCODE_SETTINGS"
+else
+  mkdir -p "$(dirname "$VSCODE_SETTINGS")"
+  cat > "$VSCODE_SETTINGS" << 'EOF'
+{
+  "[javascript]": {
+    "editor.formatOnSave": true
+  }
+}
+EOF
+fi

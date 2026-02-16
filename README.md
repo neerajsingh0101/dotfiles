@@ -12,7 +12,7 @@ A simple dotfile that gives sensible defaults, is fast and looks beautiful out o
   backed up `.zshrc` file.
 * Execute `./bin/install`.
 * You can run `./bin/install` any number of times.
-* Optionally execute `./macos/set-defaults.sh`.
+* Optionally execute `./bin/customize-macos`.
 
 
 # Wezterm as the terminal emulator
@@ -55,5 +55,5 @@ This `zshrc` file loads `~/.dotfiles.local` if it exists. Use this file for priv
 
 # Mac defaults
 
-Have a look at `macos/set-defaults.sh`. I don't like every time Mac boots it makes a sound. So I've disabled it.
+Have a look at `bin/customize-macos`. I don't like every time Mac boots it makes a sound. So I've disabled it.
 Similarly I don't like warning when I'm emptying trash.
