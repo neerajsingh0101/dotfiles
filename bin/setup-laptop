@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-# Install Xcode Command Line Tools if not already installed
-if ! xcode-select -p &> /dev/null; then
-  echo "Installing Xcode Command Line Tools..."
-  xcode-select --install
-  echo "Please wait for the installation to complete, then re-run this script."
-  exit 0
-fi
-
 # Install nvm if not already installed
 if [ ! -d "$HOME/.nvm" ]; then
   echo "Installing nvm..."
