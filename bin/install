@@ -7,6 +7,14 @@
 # * might_fail || echo "handled"    # won’t exit because `||` handles it
 set -e
 
+# Install Xcode Command Line Tools if not already installed
+if ! xcode-select -p &> /dev/null; then
+  echo "Installing Xcode Command Line Tools..."
+  xcode-select --install
+  echo "Please wait for the installation to complete, then re-run this script."
+  exit 0
+fi
+
 # Update DOTFILESD based on where install.sh is being run from
 ./bin/create-dotfiles-env
 
