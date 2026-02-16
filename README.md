@@ -4,6 +4,7 @@ A simple dotfile that gives sensible defaults, is fast and looks beautiful out o
 
 # Installation
 
+* `mkdir -p ~/code/laptop`.
 * `cd ~/code/laptop` or wherever you want to clone this repo.
 * `git clone git@github.com:neerajsingh0101/dotfiles.git`
 * `cd dotfiles`
