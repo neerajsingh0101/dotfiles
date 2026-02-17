@@ -59,8 +59,11 @@ if File.exist?(key_path) || File.exist?(pub_path)
   exit 1
 end
 
+puts ""
+puts ""
 puts "===================================="
 puts "======= Generating SSH key ======="
+Puts "Just hit enter when you are asked to enter passphrase."
 run!(%(ssh-keygen -t ed25519 -C "#{email}" -f "#{key_path}"))
 
 puts
@@ -88,7 +91,7 @@ added ||= system(%(ssh-add "#{key_path}"))
 raise "Failed to add SSH key to ssh-agent." unless added
 
 puts "===================================="
-puts "===== Public key ======="
+puts "====== Public key       ============"
 pub_key = File.read(pub_path)
 puts pub_key
 
@@ -103,7 +106,7 @@ puts "===================================="
 puts "====== Add ssh keys to GitHub ======"
 puts "Please note that public key is already copied to your clipboard."
 puts "If public key is not copied to clipboard for any reason then you can copy it from above."
-Puts "Visit Github.com in your browser and follow the instructions mentioned below."
+puts "Visit Github.com in your browser and follow the instructions mentioned below."
 puts "GitHub-> Settings -> SSH and GPG keys -> New SSH key"
 puts 'Paste the key, name it (e.g. "MacBook"), and save.'
 
