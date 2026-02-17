@@ -21,7 +21,7 @@ Execute `./bin/setup_github_ssh_key`.
 
 # Setup laptop
 
-Open Wezterm and execute `./bin/setup-laptop`.
+Execute `./bin/setup-laptop`.
 
 # Customize Macos
 
