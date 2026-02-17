@@ -4,12 +4,15 @@
 # Put private environment variables in ~/.dotfiles.local. It means they'll stay out
 # of main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.
-if [[ -a ~/.dotfiles.local ]]
-then
-  source ~/.dotfiles.local
-fi
+[[ -f ~/.dotfiles.local ]] && source ~/.dotfiles.local
 
-######## HISTORY SETUP ######################
+# if condition is checking if homebrew is installed or not
+# `brew shellenv` prints a bunch of shell commands like export PATH=..., export HOMEBREW_PREFIX=..., etc.
+# that sets your environment so your shell can “find Homebrew” (and the stuff you install with it) in the right places.
+# eval "$( ... )" executes those printed commands in the current shell.
+if command -v brew >/dev/null; then
+  eval "$(brew shellenv)"
+fi
 
 # tell zsh where to store command history
 HISTFILE=$HOME/.zhistory
@@ -18,7 +21,7 @@ HISTFILE=$HOME/.zhistory
 SAVEHIST=10000
 
 # how many histories to keep in memory. For more it will have to read from the disk
-HISTSIZE=999
+HISTSIZE=10000
 
 # Share command history across multiple running zsh sessions
 setopt share_history
@@ -30,6 +33,9 @@ setopt hist_expire_dups_first
 # If you run ls then ls again immediately, the second one won’t be added.
 # It only ignores consecutive duplicates.
 setopt hist_ignore_dups
+
+# keep history unique; keep only the latest occurrence of each command
+setopt hist_ignore_all_dups
 
 # When executing history commands like !!, !$, !grep the command will be first expanded
 # you will get to see the command before it's executed to avoid cases like I didn't want
@@ -43,17 +49,8 @@ setopt hist_verify
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
-# zsh-autosuggestions (brew)
-if command -v brew >/dev/null 2>&1; then
-  ZSH_AUTOSUGGESTIONS="${HOMEBREW_PREFIX:-$(brew --prefix)}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  [[ -f "$ZSH_AUTOSUGGESTIONS" ]] && source "$ZSH_AUTOSUGGESTIONS"
-fi
-
-# zsh-syntax-highlighting (brew)
-if command -v brew >/dev/null 2>&1; then
-  ZSH_SYNTAX_HIGHLIGHTING="${HOMEBREW_PREFIX:-$(brew --prefix)}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-  [[ -f "$ZSH_SYNTAX_HIGHLIGHTING" ]] && source "$ZSH_SYNTAX_HIGHLIGHTING"
-fi
+ZSH_AUTOSUGGESTIONS="$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+ZSH_SYNTAX_HIGHLIGHTING="$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
@@ -74,7 +71,11 @@ alias gwip='git add . && git commit -m "wip"'
 alias aic="aicommits"
 
 # git root
-alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`'
+gr() {
+  local root
+  root="$(git rev-parse --show-toplevel 2>/dev/null)" || return 1
+  cd "$root"
+}
 
 # Update local branch from the remote, and also clean up remote branches.
 # It means if a branch was deleted on the remote (say origin/feature-x), then
@@ -82,9 +83,14 @@ alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup 
 alias gpl='git pull --prune'
 
 # prefer eza
+if command -v eza >/dev/null; then
 alias ls="eza --icons=always"
 alias ll='eza --classify=auto --color -l --icons=always'
 alias la='eza --classify=auto --color -a -l --icons=always'
+else
+alias ls="ls -G" # Fallback to standard macos/linux colors
+fi
+
 
 alias cld="claude"
 alias cldd="claude --dangerously-skip-permissions"
@@ -148,16 +154,7 @@ alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
 # https://stackoverflow.com/questions/25183624/grc-bashrc-no-such-file-or-directory
 if (( $+commands[grc] )) && (( $+commands[brew] ))
 then
-  source `brew --prefix`/etc/grc.bashrc
-fi
-
-
-# if condition is checking if homebrew is installed or not
-# `brew shellenv` prints a bunch of shell commands like export PATH=..., export HOMEBREW_PREFIX=..., etc.
-# that sets your environment so your shell can “find Homebrew” (and the stuff you install with it) in the right places.
-# eval "$( ... )" executes those printed commands in the current shell.
-if command -v brew >/dev/null; then
-  eval "$(brew shellenv)"
+    source "$HOMEBREW_PREFIX/etc/grc.bashrc"
 fi
 
 # load the compinit function when I first use it.
@@ -166,16 +163,15 @@ autoload -Uz compinit
 
 # compinit initializes zsh’s completion system (tab completion).
 # It loads completion definitions so things like git <TAB> or brew <TAB> work nicely.
-compinit
+compinit -C
 
-eval "$(mise activate zsh)"
+# Put your personal bins early
+export PATH="$DOTFILESD/bin:$HOME/.local/bin:$PATH"
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
-
-# Add bin folder to PATH
-export PATH="$DOTFILESD/bin:$PATH"
+# Activate mise last so it can manage tool versions per-directory cleanly
+eval "$(mise activate zsh)"
