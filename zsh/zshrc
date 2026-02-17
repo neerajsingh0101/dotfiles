@@ -84,13 +84,12 @@ alias gpl='git pull --prune'
 
 # prefer eza
 if command -v eza >/dev/null; then
-alias ls="eza --icons=always"
-alias ll='eza --classify=auto --color -l --icons=always'
-alias la='eza --classify=auto --color -a -l --icons=always'
+  alias ls="eza --icons=always"
+  alias ll='eza --classify=auto --color -l --icons=always'
+  alias la='eza --classify=auto --color -a -l --icons=always'
 else
-alias ls="ls -G" # Fallback to standard macos/linux colors
+  alias ls="ls -G" # Fallback to standard macos/linux colors
 fi
-
 
 alias cld="claude"
 alias cldd="claude --dangerously-skip-permissions"
