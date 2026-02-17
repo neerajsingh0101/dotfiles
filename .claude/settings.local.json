@@ -7,7 +7,8 @@
       "Bash(gh pr merge:*)",
       "Bash(git pull:*)",
       "Bash(git stash:*)",
-      "Bash(command rm /Users/neerajsingh/code/laptop/dotfiles/bin/setup-laptop)"
+      "Bash(command rm /Users/neerajsingh/code/laptop/dotfiles/bin/setup-laptop)",
+      "Bash(brew:*)"
     ]
   }
 }
