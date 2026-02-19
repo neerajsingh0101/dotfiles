@@ -116,6 +116,9 @@ cask_install meetingbar
 # Install Claude Code
 curl -fsSL https://claude.ai/install.sh | sh
 
+# Install tunnelto
+curl -sL https://tunnelto.dev/install.sh | sh
+
 echo ""
 echo "Next: apply macOS defaults by running:"
 echo "  ./bin/customize-macos"

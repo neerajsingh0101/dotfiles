@@ -172,5 +172,9 @@ export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# tunnelto
+export TUNNELTO_INSTALL="$HOME/.tunnelto"
+export PATH="$TUNNELTO_INSTALL/bin:$PATH"
+
 # Activate mise last so it can manage tool versions per-directory cleanly
 eval "$(mise activate zsh)"
