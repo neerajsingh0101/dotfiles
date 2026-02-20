@@ -1,13 +1,12 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 #
-# Setup Git identity in ~/.gitconfig.local (local-only, not in dotfiles repo).
 # This script:
 # - Prompts for GitHub username, Git name, Git email
 # - Writes them to ~/.gitconfig.local
-# - Optionally shows existing values and asks before overwriting
 #
-# Note: Your shared ~/.gitconfig (symlinked from dotfiles) should include:
+# Your ~/.gitconfig need to have following line for this to
+# work. ./bin/install takes care of all this.
 #   [include]
 #     path = ~/.gitconfig.local
 
@@ -86,7 +85,7 @@ if File.file?(LOCAL_FILE)
   puts "  Your email in GitHub  = #{def_email.empty? ? '<not set>' : def_email}"
   puts
 
-  unless yes?("Overwrite #{LOCAL_FILE}? [y/N] ")
+  unless yes?("Overwrite #{LOCAL_FILE}? [y/n] ")
     puts "↩ Skipped writing #{LOCAL_FILE}"
     exit 0
   end

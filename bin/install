@@ -56,7 +56,6 @@ if [ -f "$DOTFILESD/symlinks/wezterm_local.lua" ]; then
   link_force "$DOTFILESD/symlinks/wezterm_local.lua"   "$HOME/.config/wezterm/wezterm_local.lua"
 fi
 
-ruby ./bin/update-gitconfig-local.rb
 
 # Install Homebrew if not already installed
 if ! command -v brew &> /dev/null; then
@@ -74,6 +73,7 @@ brew install zoxide    # for jumping around
 brew install fzf
 brew install atuin     # better history
 brew install eza       # this is replacement for ls
+brew install git
 brew install git-delta # Used in pager
 brew install httpd     # ab(apache bench) comes with this
 brew install k6        # see bin/simulate-traffic-k6
@@ -87,6 +87,7 @@ brew install aicommits
 brew install postgresql@18
 brew install redis
 brew install font-hack-nerd-font
+
 
 # try install; if it fails due to an existing app, adopt; if adopt fails, force.
 cask_install() {
@@ -108,7 +109,6 @@ cask_install() {
 cask_install raycast
 cask_install whatsapp
 cask_install visual-studio-code
-cask_install iterm2
 cask_install wezterm
 cask_install meetingbar
 
@@ -117,6 +117,9 @@ cask_install meetingbar
 
 # Install tunnelto
 /bin/bash -c "$(curl -fsSL https://tunnelto.dev/install.sh)"
+
+# write ~/.gitconfig.local
+ruby ./bin/setup-gitconfig-local.rb
 
 echo ""
 echo "Next: apply macOS defaults by running:"

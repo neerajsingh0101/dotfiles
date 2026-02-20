@@ -165,7 +165,7 @@ autoload -Uz compinit
 compinit -C
 
 # Put your personal bins early
-export PATH="$DOTFILESD/bin:$HOME/.local/bin:$PATH"
+export PATH="$DOTFILESD/bin:$DOTFILESD/utils:$HOME/.local/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 
