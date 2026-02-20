@@ -123,6 +123,6 @@ puts "Waiting for you to finish the steps above."
 nil until (print "Press D when done: "; STDIN.gets&.strip&.downcase == "d")
 
 fancy_puts "Now let's test if SSH keys are working."
-puts "ssh -T git@github.com"
-fancy_puts "(First time it will ask to trust GitHub's host key -- type 'yes'.)"
-fancy_puts "You should see a message which says 'You've successfully authenticated`. If you see this message means you are all set."
+fancy_puts "First time you will see a message like 'Are you sure you want to continue connecting'. Type 'yes'"
+fancy_puts "You should see a message which says 'You've successfully authenticated`. If you see this message means your SSH key is working prpoerly.^."
+system("ssh -T git@github.com")
