@@ -5,8 +5,8 @@ A simple dotfile that gives sensible defaults, is fast and looks beautiful out o
 # Installation
 
 ```
-mkdir -p ~/code/devkit
-cd ~/code/devkit
+mkdir -p ~/code/devbox
+cd ~/code/devbox
 git clone https://github.com/neerajsingh0101/dotfiles.git
 cd dotfiles
 ```
