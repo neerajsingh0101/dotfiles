@@ -13,6 +13,8 @@ set -e
 # Load dotfiles.env (source local file since $HOME symlink may not exist yet)
 [ -f "./zsh/dotfiles.env" ] && source "./zsh/dotfiles.env"
 
+
+
 # Remove destination (file/symlink/dir) and recreate symlink
 # If dst is a real file (not a symlink), back it up first
 link_force() {
@@ -115,11 +117,29 @@ cask_install meetingbar
 # Install Claude Code
 /bin/bash -c "$(curl -fsSL https://claude.ai/install.sh)"
 
-# Install tunnelto
-/bin/bash -c "$(curl -fsSL https://tunnelto.dev/install.sh)"
-
 # write ~/.gitconfig.local
 ruby ./bin/setup-gitconfig-local.rb
+
+echo ""
+read -p "Would you like to reset Raycast settings and apply the ones provided by Neeto? (If you have not customized your Raycast yet, answer yes) [y/N] " answer
+if [[ "$answer" =~ ^[Yy]$ ]]; then
+  ./bin/fetch-latest-raycast-export
+
+  echo ""
+  echo "To import Raycast settings:"
+  echo "  1. Open Raycast"
+  echo "  2. Press Cmd + , to open Settings"
+  echo "  3. Click on the 'Advanced' tab"
+  echo "  4. Scroll to 'Import & Export'"
+  echo "  5. Click 'Import'"
+  echo "  6. Choose 'latest-raycast-export.rayconfig' from your Downloads folder"
+  echo ""
+  echo "Waiting for you to finish the steps above."
+  while true; do
+    read -p "Press D when are done: " key
+    [[ "$key" =~ ^[Dd]$ ]] && break
+  done
+fi
 
 echo ""
 echo "Next: apply macOS defaults by running:"

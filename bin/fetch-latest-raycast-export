@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+#
+# Download the most recent Raycast export from Dropbox to ~/Downloads.
+#
+# Usage: fetch-latest-raycast-export
+#
+
+require "fileutils"
+require "open-uri"
+require "tmpdir"
+
+DROPBOX_URL = "https://www.dropbox.com/scl/fo/5zwdp2ydu0ca0l4lkxe0w/APQ_dCDs0PgH6e3_zeodLPM?rlkey=vvex28wd4nlnj9y14sgwf1ex5&dl=1"
+DEST_DIR = File.expand_path("~/Downloads")
+
+tmp_dir = File.join(Dir.tmpdir, "raycast-export-#{Process.pid}")
+tmp_zip = "#{tmp_dir}.zip"
+
+begin
+  puts "==> Downloading Raycast exports from Dropbox..."
+  URI.open(DROPBOX_URL) do |remote|
+    File.open(tmp_zip, "wb") { |f| f.write(remote.read) }
+  end
+
+  Dir.mkdir(tmp_dir)
+  system("unzip", "-o", "-q", tmp_zip, "-d", tmp_dir, [:out, :err] => File::NULL)
+
+  latest = Dir.glob(File.join(tmp_dir, "**", "*.rayconfig"))
+    .max_by { |f| File.basename(f) }
+
+  if latest.nil?
+    abort "Error: No .rayconfig files found. The download or extraction may have failed."
+  end
+
+  puts "==> Latest export: #{File.basename(latest)}"
+  dest_path = File.join(DEST_DIR, "latest-raycast-export.rayconfig")
+  FileUtils.cp(latest, dest_path)
+  puts "==> Saved to #{dest_path}"
+ensure
+  File.delete(tmp_zip) if File.exist?(tmp_zip)
+  FileUtils.rm_rf(tmp_dir) if File.exist?(tmp_dir)
+end
