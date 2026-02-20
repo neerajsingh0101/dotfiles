@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# Copy current working directory to clipboard
-#
-# Usage: pwdd
-
-dir="$PWD"
-printf '%s' "$dir" | pbcopy
-echo "copied: $dir to clipboard."
