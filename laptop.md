@@ -1,35 +1,3 @@
-# TOC
-
-* [Introduction](#introduction)
-* [dotfiles](#dotfiles)
-* [Setup laptop](#setup-laptop)
-* [Customize Macos](#customize-macos)
-* [Mac applications](#mac-applications)
-
-# Introduction
-
-The goal of this writeup is to provide sensible defaults to setup your Mac starting from good default prompts to sensible defaults
-for Raycast.
-
-# dotfiles
-
-Follow the instructions mentioned at [README](https://github.com/neerajsingh0101/dotfiles/blob/main/README.md) to setup your dotfiles.
-
-# Setup SSH key in GitHub
-
-Execute `./bin/setup_github_ssh_key`.
-
-# Setup laptop
-
-Execute `./bin/setup-laptop`.
-
-# Customize Macos
-
-I don't like when Mac boots then it makes a sound. So I decided to turn off that feature.
-Similarly I don't like the warning that comes up when I'm deleting items in trash.
-
-All such configurations and more can be done [here](https://github.com/neerajsingh0101/dotfiles/blob/main/bin/customize-macos).
-Once you have made the changes then go to the root folder and execute `./bin/customize-macos`.
 
 # Mac applications
 
