@@ -1,2 +1,15 @@
-#!/bin/bash
-npm install -g aicommits@develop --force
+#!/usr/bin/env ruby
+
+system("npm install -g aicommits@develop --force")
+
+dotfiles_local = File.expand_path("~/.devbox-dotfiles.local")
+api_key = File.readlines(dotfiles_local)
+  .find { |line| line.start_with?("OPENAI_API_KEY=") }
+  &.split("=", 2)&.last&.strip
+
+if api_key
+  system("aicommits config set OPENAI_API_KEY=#{api_key}")
+else
+  puts "OPENAI_API_KEY not found in #{dotfiles_local}"
+  exit 1
+end
