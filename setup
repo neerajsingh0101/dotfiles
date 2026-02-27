@@ -1,7 +1,16 @@
 #!/usr/bin/env ruby
+require 'fileutils'
 
+# set a softlink of ~/.claude/setting.json to ~/code/devbox/dotfiles/.claude/settings.json
+source = File.expand_path("~/code/devbox/dotfiles/.claude/settings.json")
+target = File.expand_path("~/.claude/settings.json")
+FileUtils.mkdir_p(File.dirname(target))
+FileUtils.ln_sf(source, target)
+
+# install aicommmits tool
 system("npm install -g aicommits@develop --force")
 
+# read the open api key and setup aicommits
 dotfiles_local = File.expand_path("~/.devbox-dotfiles.local")
 api_key = File.readlines(dotfiles_local)
   .find { |line| line.start_with?("OPENAI_API_KEY=") }
