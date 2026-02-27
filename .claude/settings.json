@@ -8,6 +8,9 @@
       "Bash(gh pr:*)",
       "Bash(gh pr view:*)",
       "Bash(gh api:*)",
+      "Bash(bundle exec neeto-audit:*)",
+      "Bash(brew install:*)",
+      "Bash(git stash:*)",
       "WebFetch(*)"
     ]
   },
