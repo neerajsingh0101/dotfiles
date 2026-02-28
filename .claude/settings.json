@@ -11,7 +11,9 @@
       "Bash(bundle exec neeto-audit:*)",
       "Bash(brew install:*)",
       "Bash(git stash:*)",
-      "WebFetch(*)"
+      "WebFetch(*)",
+      "Edit(*)",
+      "Read(*)"
     ]
   },
   "skipDangerousModePermissionPrompt": true
