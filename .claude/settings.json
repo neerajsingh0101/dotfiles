@@ -9,6 +9,8 @@
       "Bash(gh pr view:*)",
       "Bash(gh api:*)",
       "Bash(bundle exec neeto-audit:*)",
+      "Bash(bundle exec rails test:*)",
+      "Bash(bin/rails db:*)",
       "Bash(brew install:*)",
       "Bash(git stash:*)",
       "WebFetch(*)",
