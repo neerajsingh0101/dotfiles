@@ -13,6 +13,8 @@
       "Bash(bin/rails db:*)",
       "Bash(brew install:*)",
       "Bash(git stash:*)",
+      "Bash(bundle install)",
+      "Bash(git pull)",
       "WebFetch(*)",
       "Edit(*)",
       "Read(*)"
