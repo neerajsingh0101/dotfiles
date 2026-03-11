@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "alwaysThinkingEnabled": true,
   "permissions": {
     "allow": [
       "Read(**)",
@@ -11,7 +10,6 @@
       "MultiEdit(*)",
       "NotebookEdit(*)",
       "WebFetch(*)",
-
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push *)",
@@ -27,13 +25,11 @@
       "Bash(git fetch *)",
       "Bash(git rebase *)",
       "Bash(git remote *)",
-
       "Bash(gh pr *)",
       "Bash(gh issue *)",
       "Bash(gh repo *)",
       "Bash(gh status *)",
       "Bash(gh api *)",
-
       "Bash(ls *)",
       "Bash(find *)",
       "Bash(tree *)",
@@ -46,7 +42,6 @@
       "Bash(rg *)",
       "Bash(fd *)",
       "Bash(rm /Users/neerajsingh/code/*)",
-
       "Bash(bundle exec *)",
       "Bash(bundle install *)",
       "Bash(bin/*)",
@@ -74,7 +69,6 @@
       "Read(**/*.key)",
       "Read(**/.ssh/**)",
       "Read(**/.aws/**)",
-
       "Bash(curl *)",
       "Bash(wget *)",
       "Bash(ssh *)",
@@ -82,6 +76,31 @@
       "Bash(rsync *)",
       "Bash(sudo *)",
       "Bash(chmod -R 777 *)"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Hero.aiff"
+          }
+        ]
+      }
     ]
   }
 }
