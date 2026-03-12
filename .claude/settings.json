@@ -57,7 +57,13 @@
       "Bash(pytest *)",
       "Bash(python -m pytest *)",
       "Bash(go test *)",
-      "Bash(cargo test *)"
+      "Bash(cargo test *)",
+      "Bash(psql *)",
+      "Bash(ruby *)",
+      "Bash(grep *)",
+      "Bash(bundle show *)",
+      "Bash(bundle update *)",
+      "Bash(shasum *)"
     ],
     "deny": [
       "Read(.env)",
@@ -78,8 +84,6 @@
       "Bash(chmod -R 777 *)"
     ]
   },
-  "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
   "hooks": {
     "Notification": [
       {
@@ -87,7 +91,13 @@
         "hooks": [
           {
             "type": "command",
+            "description": "Sound alert when Claude needs permission (disable by removing this block)",
             "command": "afplay /System/Library/Sounds/Glass.aiff"
+          },
+          {
+            "type": "command",
+            "description": "macOS notification banner when Claude needs permission (disable by removing this block)",
+            "command": "osascript -e 'display notification \"Claude needs your permission\" with title \"Claude Code\"'"
           }
         ]
       }
@@ -97,10 +107,21 @@
         "hooks": [
           {
             "type": "command",
+            "description": "Sound alert when Claude finishes a task (disable by removing this block)",
             "command": "afplay /System/Library/Sounds/Hero.aiff"
+          },
+          {
+            "type": "command",
+            "description": "macOS notification banner when Claude finishes a task (disable by removing this block)",
+            "command": "osascript -e 'display notification \"Claude is done\" with title \"Claude Code\"'"
           }
         ]
       }
     ]
+  },
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "enabledPlugins": {
+    "ruby-lsp@claude-plugins-official": true
   }
 }
