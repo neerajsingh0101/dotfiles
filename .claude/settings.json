@@ -41,7 +41,6 @@
       "Bash(wc *)",
       "Bash(rg *)",
       "Bash(fd *)",
-      "Bash(rm /Users/neerajsingh/code/*)",
       "Bash(bundle exec *)",
       "Bash(bundle install *)",
       "Bash(bin/*)",

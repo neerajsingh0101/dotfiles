@@ -2,17 +2,16 @@
 require 'fileutils'
 
 # set a softlink of ~/.claude/setting.json to ~/code/devbox/dotfiles/.claude/settings.json
-source = File.expand_path("~/code/devbox/dotfiles/.claude/settings.json")
-target = File.expand_path("~/.claude/settings.json")
-FileUtils.mkdir_p(File.dirname(target))
-FileUtils.ln_sf(source, target)
-
+# source = File.expand_path("~/code/devbox/dotfiles/.claude/settings.json")
+# target = File.expand_path("~/.claude/settings.json")
+# FileUtils.mkdir_p(File.dirname(target))
+# FileUtils.ln_sf(source, target)
 
 # set a softlink of ~/.pi/agent/setting.json to ~/code/devbox/dotfiles/.pi/agent/settings.json
-source = File.expand_path("~/code/devbox/dotfiles/.pi/agent/settings.json")
-target = File.expand_path("~/.pi/agent/settings.json")
-FileUtils.mkdir_p(File.dirname(target))
-FileUtils.ln_sf(source, target)
+# source = File.expand_path("~/code/devbox/dotfiles/.pi/agent/settings.json")
+# target = File.expand_path("~/.pi/agent/settings.json")
+# FileUtils.mkdir_p(File.dirname(target))
+# FileUtils.ln_sf(source, target)
 
 # install aicommmits tool
 system("npm install -g aicommits@develop --force")
