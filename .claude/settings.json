@@ -74,7 +74,6 @@
       "Read(**/*.key)",
       "Read(**/.ssh/**)",
       "Read(**/.aws/**)",
-      "Bash(curl *)",
       "Bash(wget *)",
       "Bash(ssh *)",
       "Bash(scp *)",
