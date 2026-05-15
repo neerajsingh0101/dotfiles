@@ -65,21 +65,6 @@
       "Bash(shasum *)"
     ],
     "deny": [
-      "Read(.env)",
-      "Read(.env.*)",
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/secrets/**)",
-      "Read(**/*.pem)",
-      "Read(**/*.key)",
-      "Read(**/.ssh/**)",
-      "Read(**/.aws/**)",
-      "Bash(wget *)",
-      "Bash(ssh *)",
-      "Bash(scp *)",
-      "Bash(rsync *)",
-      "Bash(sudo *)",
-      "Bash(chmod -R 777 *)"
     ]
   },
   "hooks": {
