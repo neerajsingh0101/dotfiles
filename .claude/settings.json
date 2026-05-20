@@ -3,6 +3,7 @@
   "permissions": {
     "allow": [
       "Read(**)",
+      "Bash(echo *)",
       "Glob(**)",
       "Grep(*)",
       "Write(*)",
@@ -11,6 +12,7 @@
       "NotebookEdit(*)",
       "WebFetch(*)",
       "Bash(git add *)",
+      "Bash(sleep *)",
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(git checkout *)",
@@ -18,6 +20,7 @@
       "Bash(git diff *)",
       "Bash(git log *)",
       "Bash(git show *)",
+      "Bash(touch *)",
       "Bash(git branch *)",
       "Bash(git stash *)",
       "Bash(git mv *)",
