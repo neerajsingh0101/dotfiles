@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
-# set a softlink of ~/.claude/setting.json to ~/code/devbox/dotfiles/.claude/settings.json
-# source = File.expand_path("~/code/devbox/dotfiles/.claude/settings.json")
-# target = File.expand_path("~/.claude/settings.json")
-# FileUtils.mkdir_p(File.dirname(target))
-# FileUtils.ln_sf(source, target)
+# set a softlink of ~/.claude/settings.json to ~/code/devbox/dotfiles/.claude/settings.json
+source = File.expand_path("~/code/devbox/dotfiles/.claude/settings.json")
+target = File.expand_path("~/.claude/settings.json")
+FileUtils.mkdir_p(File.dirname(target))
+FileUtils.ln_sf(source, target)
 
 # set a softlink of ~/.pi/agent/setting.json to ~/code/devbox/dotfiles/.pi/agent/settings.json
 # source = File.expand_path("~/code/devbox/dotfiles/.pi/agent/settings.json")

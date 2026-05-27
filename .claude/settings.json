@@ -1,9 +1,137 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "permissions": {
-    "allow": [
+  "$schema" : "https:\/\/json.schemastore.org\/claude-code-settings.json",
+  "alwaysThinkingEnabled" : true,
+  "effortLevel" : "xhigh",
+  "enabledPlugins" : {
+    "ruby-lsp@claude-plugins-official" : true,
+    "swift-lsp@claude-plugins-official" : true
+  },
+  "hooks" : {
+    "Notification" : [
+      {
+        "hooks" : [
+          {
+            "command" : "afplay \/System\/Library\/Sounds\/Glass.aiff",
+            "type" : "command"
+          },
+          {
+            "command" : "[ -n \"$WEZTERM_PANE\" ] && echo permission_prompt > \/tmp\/claude-wezterm-$WEZTERM_PANE",
+            "type" : "command"
+          },
+          {
+            "command" : "[ -n \"$NEETLY_SOCKET\" ] && neetly notify red || true",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "permission_prompt"
+      },
+      {
+        "hooks" : [
+          {
+            "command" : "'\/Applications\/Muxy.app\/Contents\/Resources\/Muxy_Muxy.bundle\/muxy-claude-hook.sh' notification # muxy-notification-hook",
+            "timeout" : 10,
+            "type" : "command"
+          }
+        ],
+        "matcher" : ""
+      }
+    ],
+    "PermissionRequest" : [
+      {
+        "hooks" : [
+          {
+            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "*"
+      }
+    ],
+    "PostToolUse" : [
+      {
+        "hooks" : [
+          {
+            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "*"
+      }
+    ],
+    "PostToolUseFailure" : [
+      {
+        "hooks" : [
+          {
+            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "*"
+      }
+    ],
+    "Stop" : [
+      {
+        "hooks" : [
+          {
+            "command" : "afplay \/System\/Library\/Sounds\/Hero.aiff",
+            "type" : "command"
+          },
+          {
+            "command" : "[ -n \"$WEZTERM_PANE\" ] && echo done > \/tmp\/claude-wezterm-$WEZTERM_PANE",
+            "type" : "command"
+          },
+          {
+            "command" : "[ -n \"$NEETLY_SOCKET\" ] && neetly notify green || true",
+            "type" : "command"
+          }
+        ]
+      },
+      {
+        "hooks" : [
+          {
+            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
+            "type" : "command"
+          }
+        ]
+      },
+      {
+        "hooks" : [
+          {
+            "command" : "'\/Applications\/Muxy.app\/Contents\/Resources\/Muxy_Muxy.bundle\/muxy-claude-hook.sh' stop # muxy-notification-hook",
+            "timeout" : 10,
+            "type" : "command"
+          }
+        ],
+        "matcher" : ""
+      }
+    ],
+    "UserPromptSubmit" : [
+      {
+        "hooks" : [
+          {
+            "command" : "[ -n \"$WEZTERM_PANE\" ] && rm -f \/tmp\/claude-wezterm-$WEZTERM_PANE",
+            "type" : "command"
+          },
+          {
+            "command" : "[ -n \"$NEETLY_SOCKET\" ] && neetly notify clear || true",
+            "type" : "command"
+          }
+        ]
+      },
+      {
+        "hooks" : [
+          {
+            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
+            "type" : "command"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions" : {
+    "allow" : [
       "Read(**)",
-      "Bash(echo *)",
+      "Read(~\/code\/neetozone\/**)",
       "Glob(**)",
       "Grep(*)",
       "Write(*)",
@@ -12,7 +140,6 @@
       "NotebookEdit(*)",
       "WebFetch(*)",
       "Bash(git add *)",
-      "Bash(sleep *)",
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(git checkout *)",
@@ -20,7 +147,6 @@
       "Bash(git diff *)",
       "Bash(git log *)",
       "Bash(git show *)",
-      "Bash(touch *)",
       "Bash(git branch *)",
       "Bash(git stash *)",
       "Bash(git mv *)",
@@ -44,13 +170,11 @@
       "Bash(wc *)",
       "Bash(rg *)",
       "Bash(fd *)",
-      "Bash(cd *)",
       "Bash(bundle exec *)",
       "Bash(bundle install *)",
-      "Bash(bin/*)",
+      "Bash(bin\/*)",
       "Bash(rake *)",
       "Bash(rails *)",
-      "Bash(lsof *)",
       "Bash(npm run *)",
       "Bash(npm list *)",
       "Bash(node --version *)",
@@ -63,64 +187,22 @@
       "Bash(go test *)",
       "Bash(cargo test *)",
       "Bash(psql *)",
+      "Bash(redis-cli *)",
       "Bash(ruby *)",
       "Bash(grep *)",
       "Bash(bundle show *)",
       "Bash(bundle update *)",
       "Bash(shasum *)"
     ],
-    "deny": [
+    "deny" : [
+      "Read(**\/secrets\/**)",
+      "Read(**\/*.pem)",
+      "Read(**\/*.key)",
+      "Read(**\/.ssh\/**)",
+      "Read(**\/.aws\/**)",
+      "Bash(sudo *)",
+      "Bash(chmod -R 777 *)"
     ]
   },
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "permission_prompt",
-        "hooks": [
-          {
-            "type": "command",
-            "description": "Sound alert when Claude needs permission (disable by removing this block)",
-            "command": "afplay /System/Library/Sounds/Glass.aiff"
-          },
-          {
-            "type": "command",
-            "description": "Set WezTerm tab color to red when Claude needs permission",
-            "command": "[ -n \"$WEZTERM_PANE\" ] && echo permission_prompt > /tmp/claude-wezterm-$WEZTERM_PANE"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "description": "Clear WezTerm tab color when user interacts with Claude",
-            "command": "[ -n \"$WEZTERM_PANE\" ] && rm -f /tmp/claude-wezterm-$WEZTERM_PANE"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "description": "Sound alert when Claude finishes a task (disable by removing this block)",
-            "command": "afplay /System/Library/Sounds/Hero.aiff"
-          },
-          {
-            "type": "command",
-            "description": "Set WezTerm tab color to green when Claude is done",
-            "command": "[ -n \"$WEZTERM_PANE\" ] && echo done > /tmp/claude-wezterm-$WEZTERM_PANE"
-          }
-        ]
-      }
-    ]
-  },
-  "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "enabledPlugins": {
-    "ruby-lsp@claude-plugins-official": true
-  }
+  "skipDangerousModePermissionPrompt" : true
 }
