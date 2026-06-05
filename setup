@@ -14,17 +14,40 @@ FileUtils.ln_sf(source, target)
 # FileUtils.ln_sf(source, target)
 
 # install aicommmits tool
-system("npm install -g aicommits@develop --force")
+#system("npm install -g aicommits@develop --force")
 
 # read the open api key and setup aicommits
-dotfiles_local = File.expand_path("~/.devbox-dotfiles.local")
-api_key = File.readlines(dotfiles_local)
-  .find { |line| line.start_with?("OPENAI_API_KEY=") }
-  &.split("=", 2)&.last&.strip
+#dotfiles_local = File.expand_path("~/.devbox-dotfiles.local")
+#api_key = File.readlines(dotfiles_local)
+#  .find { |line| line.start_with?("OPENAI_API_KEY=") }
+#  &.split("=", 2)&.last&.strip
 
-if api_key
-  system("aicommits config set OPENAI_API_KEY=#{api_key}")
-else
-  puts "OPENAI_API_KEY not found in #{dotfiles_local}"
-  exit 1
-end
+#if api_key
+#  system("aicommits config set OPENAI_API_KEY=#{api_key}")
+#else
+#  puts "OPENAI_API_KEY not found in #{dotfiles_local}"
+#  exit 1
+#end
+
+### DISABLE GOOGLE CHROME PASSWORD MANAGER
+puts "Disabling Google Chrome password manager..."
+system(
+  "/usr/bin/defaults",
+  "write",
+  "com.google.Chrome",
+  "PasswordManagerEnabled",
+  "-bool",
+  "false"
+)
+
+# Restart macOS preferences cache so Chrome sees the change reliably.
+system(
+  "/usr/bin/killall",
+  "cfprefsd",
+  out: File::NULL,
+  err: File::NULL
+)
+
+puts "Chrome password manager disabled."
+puts "Open Chrome browser and visit chrome://policy and click 'Reload policies' to verify."
+
