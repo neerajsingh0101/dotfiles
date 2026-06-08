@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
+
+# Load .devbox env (read DEVBOXD from the environment)
+DEVBOXD = ENV.fetch("DEVBOXD")
+DOTFILESD = "#{DEVBOXD}/dotfiles"
+
+
 FileUtils.mkdir_p(File.expand_path("~/code/scratch"))
 FileUtils.mkdir_p(File.expand_path("~/code/bigbinary"))
 FileUtils.mkdir_p(File.expand_path("~/code/personal-stuff"))
@@ -10,28 +16,6 @@ source = File.expand_path("~/code/devbox/dotfiles/.claude/settings.json")
 target = File.expand_path("~/.claude/settings.json")
 FileUtils.mkdir_p(File.dirname(target))
 FileUtils.ln_sf(source, target)
-
-# set a softlink of ~/.pi/agent/setting.json to ~/code/devbox/dotfiles/.pi/agent/settings.json
-# source = File.expand_path("~/code/devbox/dotfiles/.pi/agent/settings.json")
-# target = File.expand_path("~/.pi/agent/settings.json")
-# FileUtils.mkdir_p(File.dirname(target))
-# FileUtils.ln_sf(source, target)
-
-# install aicommmits tool
-#system("npm install -g aicommits@develop --force")
-
-# read the open api key and setup aicommits
-#dotfiles_local = File.expand_path("~/.devbox-dotfiles.local")
-#api_key = File.readlines(dotfiles_local)
-#  .find { |line| line.start_with?("OPENAI_API_KEY=") }
-#  &.split("=", 2)&.last&.strip
-
-#if api_key
-#  system("aicommits config set OPENAI_API_KEY=#{api_key}")
-#else
-#  puts "OPENAI_API_KEY not found in #{dotfiles_local}"
-#  exit 1
-#end
 
 ### DISABLE GOOGLE CHROME PASSWORD MANAGER
 puts "Disabling Google Chrome password manager..."
@@ -55,3 +39,25 @@ system(
 puts "Chrome password manager disabled."
 puts "Open Chrome browser and visit chrome://policy and click 'Reload policies' to verify."
 
+def link_force(src, dst)
+  if src.to_s.empty? || dst.to_s.empty?
+    abort "Usage: link_force <src> <dst>"
+  end
+
+  unless File.exist?(src) || File.symlink?(src)
+    abort "Missing source: #{src}"
+  end
+
+  # Backup dst if it's a real file (not a symlink)
+  if File.exist?(dst) && !File.symlink?(dst)
+    backup = "#{dst}-bkp-#{Time.now.strftime('%Y%m%d%H%M%S')}"
+    puts "Backing up #{dst} to #{backup}"
+    FileUtils.mv(dst, backup)
+  else
+    FileUtils.rm_rf(dst)
+  end
+
+  FileUtils.ln_s(src, dst)
+end
+
+link_force("#{DOTFILESD}/symlinks/nvim", File.expand_path("~/.config/nvim"))
