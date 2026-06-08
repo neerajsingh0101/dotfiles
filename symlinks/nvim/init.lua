@@ -2,6 +2,7 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
+vim.cmd("set number")
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -21,16 +22,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
-local opts = {}
 
 -- Setup lazy.nvim
 require("lazy").setup("plugins")
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>lg', builtin.live_grep, { desc = 'Telescope live grep' })
-
-vim.keymap.set('n', '<leader>n', ':Neotree filesystem reveal left<CR>', {})
-
-require ("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
