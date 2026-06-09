@@ -1,8 +1,3 @@
-vim.g.mapleader = " "
-
--- It means the local leader key is backslash, used for filetype-specific or plugin-specific mappings.
-vim.g.maplocalleader = "\\"
-
 local opt = vim.opt
 
 opt.tabstop = 2 -- 2 spaces for tabs
