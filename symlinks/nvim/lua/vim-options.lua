@@ -20,9 +20,9 @@ opt.smartcase = true -- if I include mixed case in my search, assume I want case
 
 opt.cursorline = true -- as I move up and down show the cursor line
 
--- It clears Neovim's custom cursor shapes and uses the terminal's default cursor style.
--- Without this, Neovim can show different cursor shapes in normal, insert, and replace mode.
-opt.guicursor = ""
+-- It keeps the cursor thick in normal/visual/command mode, but uses a thinner
+-- vertical cursor in insert mode so insert mode is easier to notice.
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
 
 -- It keeps 8 lines visible above and below the cursor when possible.
 -- This gives me context while scrolling instead of letting the cursor sit at the screen edge.
