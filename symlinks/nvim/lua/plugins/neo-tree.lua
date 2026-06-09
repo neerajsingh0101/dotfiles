@@ -11,6 +11,9 @@ return {
     config = function()
       require("neo-tree").setup({
         filesystem = {
+          -- Watch the filesystem so neo-tree refreshes when files are added,
+          -- deleted, or renamed outside of Neovim.
+          use_libuv_file_watcher = true,
           filtered_items = {
             visible = true, -- show hidden files by default
             hide_dotfiles = false,
