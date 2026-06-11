@@ -61,3 +61,6 @@ def link_force(src, dst)
 end
 
 link_force("#{DOTFILESD}/symlinks/nvim", File.expand_path("~/.config/nvim"))
+
+
+
