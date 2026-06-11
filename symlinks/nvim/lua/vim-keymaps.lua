@@ -36,3 +36,4 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "move up in buffer with cursor 
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result cursor centered" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result cursor centered" })
 
+vim.keymap.set("n", "<leader>qc", "<cmd>cclose<CR>", { desc = "Close quickfix" })
