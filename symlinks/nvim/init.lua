@@ -20,4 +20,8 @@ require("vim-keymaps")
 require("autocmds")
 require("auto-reload")
 require("auto-save")
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  change_detection = {
+    enabled = false,
+  },
+})

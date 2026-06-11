@@ -32,7 +32,7 @@ return {
 
       require("neo-tree").setup({
         window = {
-          width = 28,
+          width = 33,
         },
         filesystem = {
           -- Watch the filesystem so neo-tree refreshes when files are added,
