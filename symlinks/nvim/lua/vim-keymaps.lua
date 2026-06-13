@@ -38,6 +38,7 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result cursor center
 
 vim.keymap.set("n", "<leader>qc", "<cmd>cclose<CR>", { desc = "Close quickfix" })
 vim.keymap.set("n", "<leader>lg", "<cmd>terminal lazygit<CR>", { desc = "Open LazyGit" })
+vim.keymap.set("n", "<leader>e", "<cmd>Explore<CR>", { desc = "Open file explorer" })
 
 -- Window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
