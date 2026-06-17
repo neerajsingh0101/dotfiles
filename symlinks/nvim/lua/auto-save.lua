@@ -54,7 +54,7 @@ local function schedule_save(buffer)
   )
 end
 
-vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+vim.api.nvim_create_autocmd("TextChanged", {
   group = autosave_group,
   pattern = "*",
   callback = function(event)
