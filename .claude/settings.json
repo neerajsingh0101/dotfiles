@@ -1,137 +1,191 @@
 {
-  "$schema" : "https:\/\/json.schemastore.org\/claude-code-settings.json",
-  "alwaysThinkingEnabled" : true,
-  "effortLevel" : "xhigh",
-  "enabledPlugins" : {
-    "ruby-lsp@claude-plugins-official" : true,
-    "swift-lsp@claude-plugins-official" : true
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
+  "enabledPlugins": {
+    "ruby-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
   },
-  "hooks" : {
-    "Notification" : [
+  "hooks": {
+    "Notification": [
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "afplay \/System\/Library\/Sounds\/Glass.aiff",
-            "type" : "command"
+            "command": "afplay /System/Library/Sounds/Glass.aiff",
+            "type": "command"
           },
           {
-            "command" : "[ -n \"$WEZTERM_PANE\" ] && echo permission_prompt > \/tmp\/claude-wezterm-$WEZTERM_PANE",
-            "type" : "command"
+            "command": "[ -n \"$WEZTERM_PANE\" ] && echo permission_prompt > /tmp/claude-wezterm-$WEZTERM_PANE",
+            "type": "command"
           },
           {
-            "command" : "[ -n \"$NEETLY_SOCKET\" ] && neetly notify red || true",
-            "type" : "command"
+            "command": "[ -n \"$NEETLY_SOCKET\" ] && neetly notify red || true",
+            "type": "command"
           }
         ],
-        "matcher" : "permission_prompt"
+        "matcher": "permission_prompt"
       },
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "'\/Applications\/Muxy.app\/Contents\/Resources\/Muxy_Muxy.bundle\/muxy-claude-hook.sh' notification # muxy-notification-hook",
-            "timeout" : 10,
-            "type" : "command"
+            "command": "'/Applications/Muxy.app/Contents/Resources/Muxy_Muxy.bundle/muxy-claude-hook.sh' notification # muxy-notification-hook",
+            "timeout": 10,
+            "type": "command"
           }
         ],
-        "matcher" : ""
-      }
-    ],
-    "PermissionRequest" : [
+        "matcher": ""
+      },
       {
-        "hooks" : [
+        "matcher": "permission_prompt",
+        "hooks": [
           {
-            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
-            "type" : "command"
-          }
-        ],
-        "matcher" : "*"
-      }
-    ],
-    "PostToolUse" : [
-      {
-        "hooks" : [
-          {
-            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
-            "type" : "command"
-          }
-        ],
-        "matcher" : "*"
-      }
-    ],
-    "PostToolUseFailure" : [
-      {
-        "hooks" : [
-          {
-            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
-            "type" : "command"
-          }
-        ],
-        "matcher" : "*"
-      }
-    ],
-    "Stop" : [
-      {
-        "hooks" : [
-          {
-            "command" : "afplay \/System\/Library\/Sounds\/Hero.aiff",
-            "type" : "command"
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
           },
           {
-            "command" : "[ -n \"$WEZTERM_PANE\" ] && echo done > \/tmp\/claude-wezterm-$WEZTERM_PANE",
-            "type" : "command"
+            "type": "command",
+            "command": "[ -n \"$WEZTERM_PANE\" ] && echo permission_prompt > /tmp/claude-wezterm-$WEZTERM_PANE"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"$WEZTERM_PANE\" ] && rm -f /tmp/claude-wezterm-$WEZTERM_PANE"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/wezterm-session-restore.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "afplay /System/Library/Sounds/Hero.aiff",
+            "type": "command"
           },
           {
-            "command" : "[ -n \"$NEETLY_SOCKET\" ] && neetly notify green || true",
-            "type" : "command"
+            "command": "[ -n \"$WEZTERM_PANE\" ] && echo done > /tmp/claude-wezterm-$WEZTERM_PANE",
+            "type": "command"
+          },
+          {
+            "command": "[ -n \"$NEETLY_SOCKET\" ] && neetly notify green || true",
+            "type": "command"
           }
         ]
       },
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
-            "type" : "command"
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
           }
         ]
       },
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "'\/Applications\/Muxy.app\/Contents\/Resources\/Muxy_Muxy.bundle\/muxy-claude-hook.sh' stop # muxy-notification-hook",
-            "timeout" : 10,
-            "type" : "command"
+            "command": "'/Applications/Muxy.app/Contents/Resources/Muxy_Muxy.bundle/muxy-claude-hook.sh' stop # muxy-notification-hook",
+            "timeout": 10,
+            "type": "command"
           }
         ],
-        "matcher" : ""
-      }
-    ],
-    "UserPromptSubmit" : [
+        "matcher": ""
+      },
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "[ -n \"$WEZTERM_PANE\" ] && rm -f \/tmp\/claude-wezterm-$WEZTERM_PANE",
-            "type" : "command"
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Hero.aiff"
           },
           {
-            "command" : "[ -n \"$NEETLY_SOCKET\" ] && neetly notify clear || true",
-            "type" : "command"
+            "type": "command",
+            "command": "[ -n \"$WEZTERM_PANE\" ] && echo done > /tmp/claude-wezterm-$WEZTERM_PANE"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$WEZTERM_PANE\" ] && rm -f /tmp/claude-wezterm-$WEZTERM_PANE",
+            "type": "command"
+          },
+          {
+            "command": "[ -n \"$NEETLY_SOCKET\" ] && neetly notify clear || true",
+            "type": "command"
           }
         ]
       },
       {
-        "hooks" : [
+        "hooks": [
           {
-            "command" : "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" ] && \"$SUPERSET_HOME_DIR\/hooks\/notify.sh\" || true",
-            "type" : "command"
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"$WEZTERM_PANE\" ] && rm -f /tmp/claude-wezterm-$WEZTERM_PANE"
           }
         ]
       }
     ]
   },
-  "permissions" : {
-    "allow" : [
+  "permissions": {
+    "allow": [
       "Read(**)",
-      "Read(~\/code\/neetozone\/**)",
+      "Read(~/code/neetozone/**)",
       "Glob(**)",
       "Grep(*)",
       "Write(*)",
@@ -172,7 +226,7 @@
       "Bash(fd *)",
       "Bash(bundle exec *)",
       "Bash(bundle install *)",
-      "Bash(bin\/*)",
+      "Bash(bin/*)",
       "Bash(rake *)",
       "Bash(rails *)",
       "Bash(npm run *)",
@@ -192,17 +246,107 @@
       "Bash(grep *)",
       "Bash(bundle show *)",
       "Bash(bundle update *)",
-      "Bash(shasum *)"
+      "Bash(shasum *)",
+      "Bash(perl *)",
+      "Bash(sed *)",
+      "Bash(awk *)",
+      "Bash(tr *)",
+      "Bash(cut *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(comm *)",
+      "Bash(diff *)",
+      "Bash(od *)",
+      "Bash(xxd *)",
+      "Bash(basename *)",
+      "Bash(dirname *)",
+      "Bash(xargs *)",
+      "Bash(printf *)",
+      "Bash(echo *)",
+      "Bash(sleep *)",
+      "Bash(mkdir *)",
+      "Bash(rmdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(touch *)",
+      "Bash(realpath *)",
+      "Bash(stat *)",
+      "Bash(env *)",
+      "Bash(test *)",
+      "Bash(jq *)",
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(cd *)",
+      "Bash(pushd *)",
+      "Bash(popd *)",
+      "Bash(true *)",
+      "Bash(false *)",
+      "Bash(time *)",
+      "Bash(timeout *)",
+      "Bash(date *)",
+      "Bash(seq *)",
+      "Bash(tee *)",
+      "Bash(tac *)",
+      "Bash(nl *)",
+      "Bash(rev *)",
+      "Bash(paste *)",
+      "Bash(join *)",
+      "Bash(column *)",
+      "Bash(expr *)",
+      "Bash(read *)",
+      "Bash(export *)",
+      "Bash(source *)",
+      "Bash(file *)",
+      "Bash(du *)",
+      "Bash(df *)",
+      "Bash(ln *)",
+      "Bash(ps *)",
+      "Bash(kill *)",
+      "Bash(open *)",
+      "Bash(curl *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(pnpm *)",
+      "Bash(bundle *)",
+      "Bash(mise *)",
+      "Bash(gem *)",
+      "Bash(brew *)",
+      "Bash(node *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(pip *)",
+      "Bash(pip3 *)",
+      "Bash(make *)",
+      "Bash(docker *)",
+      "Bash(rspec *)",
+      "Bash(rubocop *)",
+      "Bash(erblint *)",
+      "Bash(eslint *)",
+      "Bash(prettier *)",
+      "Bash(tsc *)",
+      "Bash(go *)",
+      "Bash(cargo *)",
+      "Bash(pbcopy *)",
+      "Bash(pbpaste *)",
+      "Bash(say *)",
+      "mcp__chrome-devtools",
+      "mcp__playwright",
+      "mcp__claude-in-chrome",
+      "mcp__claude_ai_Gmail__search_threads",
+      "mcp__claude_ai_Gmail__get_thread",
+      "mcp__claude_ai_Gmail__get_message",
+      "mcp__claude_ai_Gmail__list_labels",
+      "Bash(pkill *)"
     ],
-    "deny" : [
-      "Read(**\/secrets\/**)",
-      "Read(**\/*.pem)",
-      "Read(**\/*.key)",
-      "Read(**\/.ssh\/**)",
-      "Read(**\/.aws\/**)",
+    "deny": [
+      "Read(**/secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/.ssh/**)",
+      "Read(**/.aws/**)",
       "Bash(sudo *)",
       "Bash(chmod -R 777 *)"
     ]
   },
-  "skipDangerousModePermissionPrompt" : true
+  "skipDangerousModePermissionPrompt": true
 }
