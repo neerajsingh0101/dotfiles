@@ -11,6 +11,15 @@ vim.keymap.set("x", "p", [["_dP]], { desc = "Paste over selection without losing
 -- Demo at https://youtu.be/XQuNoprFW38?t=500
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete without yanking" })
 
+-- Copy the visual selection with Command-C, the way every other Mac app works.
+-- "y" is untouched and still the primary way to yank; this is only an extra key.
+--
+-- A terminal normally eats Command-C itself, so Neovim never sees it. WezTerm is
+-- configured to forward it as <D-c> when Neovim is running and nothing is selected
+-- with the mouse. That forwarding lives in symlinks/wezterm/keys.lua in the
+-- laptonite repo, so this mapping does nothing on its own.
+vim.keymap.set("x", "<D-c>", [["+y]], { desc = "Copy selection to system clipboard" })
+
 -- In the normal mode Ctrl c will remove all the highlights created by search term
 -- https://youtu.be/XQuNoprFW38?t=538
 vim.keymap.set("n", "<C-c>", ":nohl<CR>", { desc = "Clear search highlighting", silent = true })
