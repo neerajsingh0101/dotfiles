@@ -8,7 +8,22 @@ opt.softtabstop = 2 -- when I press tab then indent to two spaces
 
 opt.number = true -- turn on line number
 opt.relativenumber = true -- make line number relative
-opt.wrap = false -- if the line is longer than screen width then don't wrap
+-- It folds a long line onto the next screen row instead of letting it run off the
+-- right edge where I cannot read it. This only changes how the line is drawn.
+-- The buffer is untouched, so no newline is ever inserted into the file.
+opt.wrap = true
+
+-- It breaks the wrap at a word boundary instead of chopping a word in half at
+-- whatever column the window edge happens to land on.
+opt.linebreak = true
+
+-- It aligns the continuation rows with the indentation of the original line
+-- instead of restarting them at column 0.
+opt.breakindent = true
+
+-- It prefixes each continuation row with this marker so I can tell a wrapped
+-- line apart from a genuinely new line.
+opt.showbreak = "↳ "
 
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if I include mixed case in my search, assume I want case-sensitive
