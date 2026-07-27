@@ -186,7 +186,6 @@
     "allow": [
       "Read(**)",
       "Read(~/code/neetozone/**)",
-      "Glob(**)",
       "Grep(*)",
       "Write(*)",
       "Edit(*)",
