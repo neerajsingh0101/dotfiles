@@ -26,16 +26,6 @@
         "matcher": "permission_prompt"
       },
       {
-        "hooks": [
-          {
-            "command": "'/Applications/Muxy.app/Contents/Resources/Muxy_Muxy.bundle/muxy-claude-hook.sh' notification # muxy-notification-hook",
-            "timeout": 10,
-            "type": "command"
-          }
-        ],
-        "matcher": ""
-      },
-      {
         "matcher": "permission_prompt",
         "hooks": [
           {
@@ -127,16 +117,6 @@
             "type": "command"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "'/Applications/Muxy.app/Contents/Resources/Muxy_Muxy.bundle/muxy-claude-hook.sh' stop # muxy-notification-hook",
-            "timeout": 10,
-            "type": "command"
-          }
-        ],
-        "matcher": ""
       },
       {
         "hooks": [
