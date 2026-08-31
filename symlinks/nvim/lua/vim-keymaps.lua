@@ -45,6 +45,95 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "move up in buffer with cursor 
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result cursor centered" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result cursor centered" })
 
+-- Make zt and zb land exactly on the top and bottom line.
+--
+-- scrolloff (set to 8 in vim-options.lua) is a hard rule about how close the cursor
+-- is allowed to get to a window edge, and zt/zb are not exempt from it. So plain zt
+-- parks the line 8 rows below the top and plain zb parks it 8 rows above the bottom.
+-- zz looks correct only because the middle of the screen never breaks the rule.
+--
+-- Turning scrolloff off for the jump and switching it straight back does not work:
+-- the very next redraw re-applies the rule and yanks the view back where it was.
+-- So instead it is left off and restored later, by the autocmd below, once the cursor
+-- has drifted far enough from the edge that restoring it changes nothing on screen.
+-- That way the landing is exact and the view never visibly jumps.
+local pending = nil
+
+-- The saved value is read at "local" scope on purpose. When only the global scrolloff
+-- is set, this reads back as -1, and restoring -1 means "go back to following the
+-- global value" rather than freezing today's 8 into this window forever.
+local function scroll_to_edge(cmd)
+  if pending == nil then
+    pending = {
+      win = vim.api.nvim_get_current_win(),
+      saved = vim.api.nvim_get_option_value("scrolloff", { scope = "local", win = 0 }),
+      padding = vim.wo.scrolloff,
+    }
+  end
+  vim.api.nvim_set_option_value("scrolloff", 0, { scope = "local", win = 0 })
+  local count = vim.v.count > 0 and tostring(vim.v.count) or ""
+  vim.cmd("normal! " .. count .. cmd)
+end
+
+local function restore_scrolloff()
+  if pending == nil then
+    return
+  end
+  if vim.api.nvim_win_is_valid(pending.win) then
+    vim.api.nvim_set_option_value("scrolloff", pending.saved, { scope = "local", win = pending.win })
+  end
+  pending = nil
+end
+
+vim.keymap.set("n", "zt", function()
+  scroll_to_edge("zt")
+end, { desc = "Put current line at the very top" })
+
+vim.keymap.set("n", "zb", function()
+  scroll_to_edge("zb")
+end, { desc = "Put current line at the very bottom" })
+
+local scroll_group = vim.api.nvim_create_augroup("ExactScrollEdges", { clear = true })
+
+-- Put scrolloff back as soon as the cursor sits at least "padding" rows clear of both
+-- edges, because at that point the rule is already satisfied and re-applying it cannot
+-- move the screen.
+vim.api.nvim_create_autocmd("CursorMoved", {
+  group = scroll_group,
+  callback = function()
+    if pending == nil or vim.api.nvim_get_current_win() ~= pending.win then
+      return
+    end
+    local row = vim.fn.winline()
+    local height = vim.fn.winheight(0)
+    if row > pending.padding and (height - row) >= pending.padding then
+      restore_scrolloff()
+    end
+  end,
+})
+
+-- A window created while scrolloff is still switched off copies the zero from the window
+-- it was split out of, and nothing above would ever put it right, so that split would sit
+-- there with no padding forever. This hands the new window the real value instead.
+vim.api.nvim_create_autocmd("WinNew", {
+  group = scroll_group,
+  callback = function()
+    if pending ~= nil then
+      vim.api.nvim_set_option_value("scrolloff", pending.saved, { scope = "local", win = 0 })
+    end
+  end,
+})
+
+-- Leaving the window ends the special case, and any correction it causes happens somewhere
+-- I am no longer looking. It is deferred because WinLeave fires just before WinNew, and the
+-- handler above still needs to see what the saved value was.
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = scroll_group,
+  callback = function()
+    vim.schedule(restore_scrolloff)
+  end,
+})
+
 vim.keymap.set("n", "<leader>qc", "<cmd>cclose<CR>", { desc = "Close quickfix" })
 vim.keymap.set("n", "<leader>lg", "<cmd>terminal lazygit<CR>", { desc = "Open LazyGit" })
 vim.keymap.set("n", "<leader>e", "<cmd>Explore<CR>", { desc = "Open file explorer" })

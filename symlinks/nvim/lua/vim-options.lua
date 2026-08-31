@@ -36,6 +36,9 @@ opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr-o:hor20"
 
 -- It keeps 8 lines visible above and below the cursor when possible.
 -- This gives me context while scrolling instead of letting the cursor sit at the screen edge.
+--
+-- This also applies to zt and zb, which would otherwise stop 8 lines short of the edge.
+-- vim-keymaps.lua remaps those two so they still land exactly on the top and bottom line.
 opt.scrolloff = 8
 
 -- It disables the vertical color column guide.
