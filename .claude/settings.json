@@ -166,6 +166,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "fable[1m]",
   "hooks": {
     "Notification": [
       {
@@ -328,6 +329,5 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
-  "skipDangerousModePermissionPrompt": true,
-  "model": "claude-fable-5[1m]"
+  "skipDangerousModePermissionPrompt": true
 }
